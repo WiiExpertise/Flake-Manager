@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow" />
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="shortcut icon" href="/css_js/custom/img/favicon.jpg" type="image/vnd.microsoft.icon" />
+<link href="https://fonts.googleapis.com/css?family=Maiden+Orange" rel="stylesheet"> 
+<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Kreon:400,700" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="icon" type="image/png" href="/css_js/penguin.png">
+<link rel="stylesheet" href="/css_js/bootstrap/css/bootstrap.min.css">
+<script src="/css_js/bootstrap/js/bootstrap.min.js"> </script>
+<link rel="stylesheet" href="/css_js/custom.css">
+<script src="/css_js/custom.js"></script>
+<title> Update | Flake</title>
+</head>
+<body>
+
+
+
+        <% if (update_msg != '') { %>
+            <div class="alert alert-success" role="alert"><%= update_msg %></div>
+            <% } %>
+
+            <% if (error_msg != '') { %>
+                <div class="alert alert-danger" role="alert"><%= error_msg %></div>
+                <% } %>
+
+            <div class="back-button"> 
+                    <form action="/panel" method="GET" name="reg" onsubmit=""> 
+                    <input type="submit" value="Go Back">
+                  </form>
+                </div>
+
+<% if (update_type == 'password') { %>
+    <div class="account-login">
+        <h1 class="text-center fade1 upward emu">Update Your Password</h1>
+        <form action="/update" method="POST" name="reg" onsubmit="">
+            <input type="password" name="password" id="password" oninput="passwordCheck()" placeholder="Password" required>
+            <input type="password" name="password_confirm" id="password_confirm" oninput="passwordConfirm()" placeholder="Confirm Your Password" required>
+            <input type="submit">
+        </form>
+    </div>
+    <% } %>
+    
+
+
+    <% if (update_type == 'email') { %>
+        <div class="account-login">
+            <h1 class="text-center fade1 upward emu">Update Your Email</h1>
+            <form action="/update" method="POST" name="reg" onsubmit="">
+                <input type="text" name="email" id="email" oninput="emailCheck();" placeholder="Email" required>
+                <input type="submit">
+            </form>
+        </div>
+        <% } %>
+
+        <% if (update_type == 'add_items') { %>
+            <div class="account-login">
+                <h1 class="text-center fade1 upward emu">Add Items</h1>
+                <form action="/update" method="POST" name="reg" onsubmit="">
+                    <input type="number" name="item" id="item" placeholder="Item ID" required>
+                    <input type="submit">
+                </form>
+            </div>
+            <% } %>
+
+            <% if (update_type == 'ban') { %>
+                <div class="account-login">
+                    <h1 class="text-center fade1 upward emu">Submit A Ban</h1>
+                    <form action="/ban" method="POST" name="reg" onsubmit="">
+                        <input type="text" name="username" id="username" oninput="usernamePurity()" placeholder="Username" required>
+                        <input type="number" name="hours" id="hours" placeholder="Hours" required>
+                        <input type="text" name="reason" id="reason" oninput="" placeholder="Reason" required>
+                        <input type="submit">
+                    </form>
+                </div>
+                <% } %>
+        
+            <% if (update_type == 'verify') { %>
+                <div class="table"> 
+    
+                <div id="verify">
+                            <table class="table table-bordered" style="margin: 0px auto;">
+ 
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Username</th>
+                                        <th> Verify User?</th>
+                                    </tr>
+                                    
+                            
+                                    <% if (approval) { %>
+                                    <% approval.forEach(function(approval){ %>
+                                        <tr>
+                                            <td><%= approval.ID %></td>
+                                            <td><%= approval.Username %></td>
+                                            <td>
+                                                <div class="stats"> 
+                                                    <a href='/verify/<%= approval.ID %>'>Yes</a> &nbsp;                            
+                                                        <input type="hidden" name="_method" value="DELETE" />
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <% }) %>
+                                 
+                                </table>
+                </form>
+                </div>
+            </div>
+            
+                <% } %>
+                <% } %>
+
+                <% if (update_type == 'unban') { %>
+                    <div class="table"> 
+        
+                    <div id="verify">
+                                <table class="table table-bordered" style="margin: 0px auto;">
+     
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Reason</th>
+                                            <th> Unban User?</th>
+                                        </tr>
+                                        
+                                
+                                        <% if (bans) { %>
+                                        <% bans.forEach(function(bans){ %>
+                                            <tr>
+                                                <td><%= bans.PenguinID %></td>
+                                                <td><%= bans.Comment %></td>
+                                                <td>
+                                                    <div class="stats"> 
+                                                        <a href='/unban/<%= bans.PenguinID %>'>Yes</a> &nbsp;                                     
+                                                            <input type="hidden" name="_method" value="DELETE" />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <% }) %>
+                                     
+                                    </table>
+                    </div>
+                </div>
+                
+                    <% } %>
+                    <% } %>
+    
+              
+             
+                
+
+              
+</body>
+</html>
