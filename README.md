@@ -39,6 +39,8 @@ Reverse proxy is the best way to have this manager running in production, make s
 
 Reverse proxying removes the extra 4444 bit, https://www.linode.com/docs/web-servers/nginx/use-nginx-reverse-proxy/
 
+For the avatar to work, edit panel.html and change the two links saying `http://media.localhost/play/v2/client/avatar.swf` to whatever domain yours is, upload avatar.swf (in views) to your client folder because the SWF goes back to the content folder to find the paper, icons and sprites for giving clothing to the avatar. If you don't do this correctly, the avatar won't work :~( 
+
 
 This will remain an open source manager for anyone to use/steal parts of this for their own manager? I don't mind
 
