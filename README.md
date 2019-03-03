@@ -1,7 +1,11 @@
 # Flake-Manager
 
 
-A fully functional manager system written in nodeJS, sequelize used for database transactions and express.js for collecting http post requests. Has basic checks for whether the session is expired or not, it also does not give any UNAUTHORIZED access to certain parts, e.g. if you are not logged in, you'll be redirected to the login page, if you aren't a moderator and you're trying to access /verify or /unban it will redirect you to the main panel. This was created for Houdini's ban, inventory and penguin table structure for it's features. Different interfaces by rendering the ejs file based on whether you are a moderator or normal user, allows owners (who use this manager) to choose whether a user is allowed to add items or not, allows admins to ban and unban users, allows normal users to change their password, email and verify usernames. The panel has an avatar to display a graphical representation of your penguin, it also displays your username, email, coins and rank. All code written by ro and free for anyone to fork.
+A fully functional manager system written in nodeJS, sequelize used for database transactions and express.js for collecting http post requests. Has basic checks for whether the session is expired or not, it also does not give any UNAUTHORIZED access to certain parts, e.g. if you are not logged in, you'll be redirected to the login page, if you aren't a moderator and you're trying to access /verify or /unban it will redirect you to the main panel. 
+
+This was created for Houdini's ban, inventory and penguin table structure for it's features. Different interfaces by rendering the ejs file based on whether you are a moderator or normal user, allows owners (who use this manager) to choose whether a user is allowed to add items or not, allows admins to ban and unban users, allows normal users to change their password, email and verify usernames. The panel has an avatar to display a graphical representation of your penguin, it also displays your username, email, coins and rank. 
+
+All code written by ro and free for anyone to fork.
 
 
 
