@@ -17,16 +17,21 @@ PREVIEW/SNIPPET: https://vimeo.com/321111919
 # Requirements
 
 Just execute `npm install` to install ALL dependencies at once, or if you want to do this one by one or for your own node app then do `npm install --save modulename` obviously replacing `modulename` with whatever dependency it is like bcrypt or connect-flash.
-
+    
+    
     "bcrypt": "^3.0.4",
+    "canvas": "^2.3.1",
+    "colors": "^1.3.3",
     "connect-flash": "^0.1.1",
+    "download": "^7.1.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "md5": "^2.2.1",
     "mysql2": "^1.6.5",
     "request": "^2.88.0",
-    "sequelize": "^4.43.0"
+    "sequelize": "^4.43.0",
+    "url-exists": "^1.0.3"
 
 After, you need to register google recaptcha keys from google specifically v3. Edit Config.js and add the secret key there, the site key goes in index.html like shown here: https://i.imgur.com/8seD36D.png in two places.
 
