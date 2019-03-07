@@ -16,7 +16,7 @@ PREVIEW/SNIPPET: https://vimeo.com/321111919
 
 # Requirements
 
-Just do `npm init` to install all the dependencies or just do it individually/one by one using `npm install`: 
+Just execute `npm install` to install ALL dependencies at once, or if you want to do this one by one or for your own node app then do `npm install --save modulename` obviously replacing `modulename` with whatever dependency it is like bcrypt or connect-flash.
 
     "bcrypt": "^3.0.4",
     "connect-flash": "^0.1.1",
