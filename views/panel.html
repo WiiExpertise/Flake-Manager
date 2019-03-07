@@ -60,12 +60,12 @@
             </div>
 
 
-            <div class="columns">
-              <div class="column">
-                <div class="box avatar-container">
-                  <embed src="http://media.localhost/play/v2/client/avatar.swf" wmode="transparent" salign="t" scale="noborder" flashvars="<%= avatar %>" />
-                </div>
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Your Penguin</h5>
+                  <img class="card-img-top" src="/avatar/<%= id %>" alt="Card image cap">
               </div>
+            </div>
 
               <div class="panel-button"> 
                 <form action="/logout" method="GET" name="reg" onsubmit=""> 
@@ -136,14 +136,12 @@
                   </tbody>
                 </table>
             </div>
-
-
-            <div class="columns">
-              <div class="column">
-                <div class="box avatar-container">
-                  <embed src="http://media.localhost/play/v2/client/avatar.swf" wmode="transparent" salign="t" scale="noborder" flashvars="<%= avatar %>" />
-                </div>
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Your Penguin</h5>
+                  <img class="card-img-top" src="/avatar/<%= id %>" alt="Card image cap">
               </div>
+            </div>
               <% if (verify_user == 1) { %>
                 <div class="panel-button"> 
                     <form action="/verify" method="GET" name="reg" onsubmit=""> 
