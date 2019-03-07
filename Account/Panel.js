@@ -7,6 +7,11 @@ exports.UsernameLocator = async function (username){
     return account
 }
 
+exports.IDLocator = async function (ID){
+    var account = await Penguin.findOne({where: {ID: ID}});
+    return account;
+}
+
 exports.GetApprovals = async function(){
     var approvals = await Penguin.findAll({where: {Approval: 0}});
     return approvals;
