@@ -1,5 +1,6 @@
 const express = require('express');
 var Account = require('./Account/Account');
+const Avatar = require('./Account/Avatar');
 const Pages = require('./Account/Pages');
 const Panel = require('./Account/Panel');
 const CONFIG = require('./Config');
@@ -214,6 +215,17 @@ flake.get('/panel', async function(request, response) {
 	} else {
 		response.redirect('/');
 	}
+});
+
+flake.get('/avatar/(:id)', async function(request, response) {
+    var ID = request.params.id;
+    var size = 120;
+    var penguin = await Panel.IDLocator(ID);
+    const avatar = new Avatar(penguin, size);
+    var img = await avatar.build()
+    response.set('Content-Type', 'image/png');
+    response.set('Content-Length', img.length);
+    response.end(img);
 });
 
 flake.listen(CONFIG.HTTP.ACCOUNT, () => console.log(`RUNNING FLAKE MANAGER SYSTEM ON PORT: ${CONFIG.HTTP.ACCOUNT}!`));
