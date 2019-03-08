@@ -15,7 +15,7 @@ Credit to jackie/@Pyrodash for the Avatar API code all written by him.
 PREVIEW/SNIPPET: https://vimeo.com/321111919 
 
 
-NOTE: This old snippet/video is taken with the OLD way of rendering the avatar. 
+NOTE: This old snippet/video is taken with the OLD way of rendering the avatar. (SWF METHOD)
 
 The latest version of this manager system renders images to display an avatar, no SWFs are used and that annoying press-play button is no longer there for the avatar.
 
