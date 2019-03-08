@@ -5,10 +5,10 @@ A fully functional manager system written in nodeJS, sequelize used for database
 
 This was created for Houdini's ban, inventory and penguin table structure for it's features. Different interfaces by rendering the ejs file based on whether you are a moderator or normal user, allows owners (who use this manager) to choose whether a user is allowed to add items or not, allows admins to ban and unban users, allows normal users to change their password, email and verify usernames. The panel has an avatar to display a graphical representation of your penguin, it also displays your username, email, coins and rank. 
 
-All code (apart from the avatar API) written by ro and free for anyone to fork.
+All code (apart from the avatar API) has been written by ro and free for anyone to fork.
 
 
-Credit to jackie/@Pyrodash for the Avatar API code all written by him. Much appreciated <3 
+Credit to jackie/@Pyrodash for the Avatar API code all written by him.
 
 
 
