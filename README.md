@@ -12,14 +12,19 @@ Credit to jackie/@Pyrodash for the Avatar API code all written by him.
 
 
 
-PREVIEW/SNIPPET: https://vimeo.com/321111919 <- note: this old snippet/video was taken before we made updates to the avatar method (we now no longer use a SWF for avatars but rather an image so it always loads, no need for any flash)
+PREVIEW/SNIPPET: https://vimeo.com/321111919 
+
+
+NOTE: This old snippet/video is taken with the OLD way of rendering the avatar. 
+
+The latest version of this manager system renders images to display an avatar, no SWFs are used and that annoying press-play button is no longer there for the avatar.
 
 # Quick Summary Of How To Install
 
  - install NodeJS on your VPS or computer (localhost)
  - upload the manager somewhere (anywhere, desktop?) and execute `npm install` in whatever the directory is (with Boot.js inside there!)
  - edit Config.js, edit index.html (for the site key) 
- - boom, manager works :~) 
+ - boom, manager works.
 
 # Requirements
 
