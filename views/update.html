@@ -33,7 +33,7 @@
 
             <div class="back-button"> 
                     <form action="/panel" method="GET" name="reg" onsubmit=""> 
-                    <input type="submit" value="Go Back">
+                    <input type="submit" class="btn btn-primary" value="Go Back">
                   </form>
                 </div>
 
@@ -43,7 +43,7 @@
         <form action="/update" method="POST" name="reg" onsubmit="">
             <input type="password" name="password" id="password" oninput="passwordCheck()" placeholder="Password" required>
             <input type="password" name="password_confirm" id="password_confirm" oninput="passwordConfirm()" placeholder="Confirm Your Password" required>
-            <input type="submit">
+            <input type="submit" class="btn btn-primary">
         </form>
     </div>
     <% } %>
@@ -55,7 +55,7 @@
             <h1 class="text-center fade1 upward emu">Update Your Email</h1>
             <form action="/update" method="POST" name="reg" onsubmit="">
                 <input type="text" name="email" id="email" oninput="emailCheck();" placeholder="Email" required>
-                <input type="submit">
+                <input type="submit" class="btn btn-primary" class="btn btn-primary">
             </form>
         </div>
         <% } %>
@@ -65,7 +65,7 @@
                 <h1 class="text-center fade1 upward emu">Add Items</h1>
                 <form action="/update" method="POST" name="reg" onsubmit="">
                     <input type="number" name="item" id="item" placeholder="Item ID" required>
-                    <input type="submit">
+                    <input type="submit" class="btn btn-primary">
                 </form>
             </div>
             <% } %>
@@ -77,7 +77,7 @@
                         <input type="text" name="username" id="username" oninput="usernamePurity()" placeholder="Username" required>
                         <input type="number" name="hours" id="hours" placeholder="Hours" required>
                         <input type="text" name="reason" id="reason" oninput="" placeholder="Reason" required>
-                        <input type="submit">
+                        <input type="submit" class="btn btn-primary">
                     </form>
                 </div>
                 <% } %>

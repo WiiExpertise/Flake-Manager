@@ -2,11 +2,11 @@ const CONFIG = require('../Config');
 var Panel = require('./Panel');
 
 exports.Blank = function(){
-    return { error_msg : '', success_msg: '' };
+    return { error_msg : '', success_msg: '', site_key: CONFIG.CAPTCHA.SITE_KEY };
 }
 
 exports.CaptchaFalse = function(){
-    return { error_msg : CONFIG.ERROR_MSGS.CAPTCHA, success_msg: '' };
+    return { error_msg : CONFIG.ERROR_MSGS.CAPTCHA, success_msg: '', site_key: CONFIG.CAPTCHA.SITE_KEY };
 }
 
 exports.Success = function(){
@@ -18,7 +18,7 @@ exports.Error = function(){
 }
 
 exports.UsernameDoesNotExist = function(){
-    return { error_msg : CONFIG.ERROR_MSGS.USERNAME_NOT_EXIST, success_msg: '' };
+    return { error_msg : CONFIG.ERROR_MSGS.USERNAME_NOT_EXIST, success_msg: '', site_key: CONFIG.CAPTCHA.SITE_KEY };
 }
 
 exports.BanUsernameDoesntExist = function(){
@@ -27,7 +27,7 @@ exports.BanUsernameDoesntExist = function(){
 
 
 exports.IncorrectPassword = function(){
-    return { error_msg : CONFIG.ERROR_MSGS.INCORRECT_PASSWORD, success_msg: '' };
+    return { error_msg : CONFIG.ERROR_MSGS.INCORRECT_PASSWORD, success_msg: '', site_key: CONFIG.CAPTCHA.SITE_KEY };
 }
 
 exports.EmailChange = function(){

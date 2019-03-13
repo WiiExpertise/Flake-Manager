@@ -17,10 +17,10 @@
 <script src="/css_js/bootstrap/js/bootstrap.min.js"> </script>
 <link rel="stylesheet" href="/css_js/custom.css">
 <script src="/css_js/custom.js"></script>
-<script src="https://www.google.com/recaptcha/api.js?render=SITE_KEY_GOES_HERE"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=<%= site_key %>"></script>
 <script>
   grecaptcha.ready(function () {
-      grecaptcha.execute('SITE_KEY_GOES_HERE', { action: 'home' }).then(function (token) {
+      grecaptcha.execute('<%= site_key %>', { action: 'home' }).then(function (token) {
           var recaptchaResponse = document.getElementById('recaptchaResponse');
           recaptchaResponse.value = token;
       });
@@ -46,7 +46,7 @@
         <form action="/" method="POST" name="reg" onsubmit="">
             <input type="text" name="username" id="username" oninput="usernamePurity();" placeholder="Username" required>
             <input type="password" name="password" id="password" oninput="passwordCheck()" placeholder="Password" required>
-            <input type="submit">
+            <input type="submit" class="btn btn-primary">
             <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
         </form>
     </div>

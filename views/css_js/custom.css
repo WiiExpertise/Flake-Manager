@@ -40,39 +40,15 @@
     margin-inline-end: 3px;
 }
 
-#button{
-  background-color: #339985;
-  color: #FFFFFF;
-}
+
 #button:hover{
     color: yellow;
 }
 
-.panel-button input[type="submit"] {
-    width: 100%;
-    padding: 15px;
-    background-color: #339985;
-    border: 0;
-    box-sizing: border-box;
-    cursor: pointer;
-    font-weight: bold;
-    color: #ffffff;
-    outline:0;
-}
 
 
 
-.back-button input[type="submit"] {
-    width: 100%;
-    padding: 15px;
-    background-color: #339985;
-    border: 0;
-    box-sizing: border-box;
-    cursor: pointer;
-    font-weight: bold;
-    color: #ffffff;
-    outline:0;
-}
+
 
 .back-button {
     width: 300px;
@@ -82,16 +58,7 @@
     margin-inline-end: 3px;
 }
 
-#verify input[type="submit"] {
-    width: 100%;
-    padding: 15px;
-    background-color:#339985;
-    border: 0;
-    box-sizing: border-box;
-    cursor: pointer;
-    font-weight: bold;
-    color: #FFFFFF;
-}
+
 
 .account-login input[type="password"],
 .account-login input[type="text"] {
@@ -109,16 +76,7 @@
     margin-bottom: 15px;
     box-sizing:border-box;
 }
-.account-login input[type="submit"] {
-    width: 100%;
-    padding: 15px;
-    background-color: #339985;
-    border: 0;
-    box-sizing: border-box;
-    cursor: pointer;
-    font-weight: bold;
-    color: #ffffff;
-}
+
 .emu {
     -webkit-animation-duration: 1s;
     animation-duration: 1s;
