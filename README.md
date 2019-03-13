@@ -5,30 +5,26 @@ A fully functional manager system written in nodeJS, sequelize used for database
 
 This was created for Houdini's ban, inventory and penguin table structure for it's features. Different interfaces by rendering the ejs file based on whether you are a moderator or normal user, allows owners (who use this manager) to choose whether a user is allowed to add items or not, allows admins to ban and unban users, allows normal users to change their password, email and verify usernames. The panel has an avatar to display a graphical representation of your penguin, it also displays your username, email, coins and rank. 
 
-All code (apart from the avatar API) has been written by ro and free for anyone to fork.
+All backend code (apart from the avatar API) was written by me, the frontend was put together by me. 
 
 
-Credit to jackie/@Pyrodash for the Avatar API code all written by him.
+Credit to jackie/@Pyrodash for the Avatar API code written by him.
+
+PREVIEW/SNIPPET: https://vimeo.com/323510405
+
+# How to use?
 
 
-
-PREVIEW/SNIPPET: https://vimeo.com/321111919 
-
-
-NOTE: This old snippet/video is taken with the OLD way of rendering the avatar. (SWF METHOD)
-
-The latest version of this manager system renders images to display an avatar, no SWFs are used and that annoying press-play button is no longer there for the avatar.
-
-# Quick Summary Of How To Install
-
- - install NodeJS on your VPS or computer (localhost)
- - upload the manager somewhere (anywhere, desktop?) and execute `npm install` in whatever the directory is (with Boot.js inside there!)
- - edit Config.js, edit index.html (for the site key) 
- - boom, manager works.
+ - install node.js on your VPS or laptop.
+ - upload your manager somewhere (apart from the web-server of course!), use `cd` to go to the directory wherever it is placed. 
+ - Once you are in the directory, you can run `npm install` and it will download all the dependencies you need for this manager to work. 
+ - Now all you have to do is edit Config.js.
+ - Run the manager from terminal using the command `node Boot`. 
+ - Party.
 
 # Requirements
 
-Just execute `npm install` to install ALL dependencies at once, or if you want to do this one by one or for your own node app then do `npm install --save modulename` obviously replacing `modulename` with whatever dependency it is like bcrypt or connect-flash.
+Just execute `npm install` to install the dependencies all at once.
     
     
     "bcrypt": "^3.0.4",
@@ -45,23 +41,26 @@ Just execute `npm install` to install ALL dependencies at once, or if you want t
     "sequelize": "^4.43.0",
     "url-exists": "^1.0.3"
 
-After, you need to register google recaptcha keys from google specifically v3. Edit Config.js and add the secret key there, the site key goes in index.html like shown here: https://i.imgur.com/8seD36D.png in two places.
 
-Edit Config.js and add your MySQL details, add a secret session key here: https://gyazo.com/c906aec8c10962293f71b95f0481f789
+- The only file you have to edit is Config.js, what you need to edit in there is the secret session key in there, it has to be something random and secure so get any type of password/key from https://randomkeygen.com/ 
 
-Get one from https://randomkeygen.com/ 
+- Edit these options: https://gyazo.com/be0f42f821140809928bc09c2d992de1 to allow normal users to add any item in-game or to allow moderators to verify usernames/approval. Just set the options to 1 if you wish.
 
-Also, edit this: https://gyazo.com/be0f42f821140809928bc09c2d992de1
+- Edit the custom messages (if you wish).
 
-If you want normal users to have access to adding ANY item, set `ADD_ITEMS` to 1.
+- Register your recaptcha keys from google recaptcha (v3). Add your site and secret key here: https://i.imgur.com/MBq4Oxm.png
 
-If you want moderators to have access to verifying users, set `VERIFY_USERS` to 1. 
+- When running this on your site, you need your sub-domain to be proxying off port 4444 (or whatever port you set in Config.js). So edit your nginx or apache configuration, add this line `proxy_pass http://localhost:3000/;`.
 
-It's up to you I suppose, you can also edit each custom message the panel gives for any error or success. 
 
-Reverse proxy is the best way to have this manager running in production, make sure you change the HTTP port (it's 4444 by default), or you can run it off a sub-domain but you will have to access it via sub.domain:4444
 
-Reverse proxying removes the extra 4444 bit, https://www.linode.com/docs/web-servers/nginx/use-nginx-reverse-proxy/
+
+# Updates
+
+
+- Updated VIMEO snippet to show the image rendered avatars instead of SWFs.
+- Better looking buttons added.
+- Site key is now configured in Config.js instead of the index.html file.
 
 
 
