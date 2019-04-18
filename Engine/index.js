@@ -3,9 +3,9 @@ const bodyparser = require('body-parser');
 const flash = require('connect-flash');
 const _request = require("request");
 const path = require('path');
+const session = require('express-session');
 
-let session = require('express-session');
-const log = require('../Console');
+const Log = require('../Console');
 const Panel = require('./Panel');
 const Login = require('./Login');
 const Avatar = require('./Avatar');
@@ -42,7 +42,7 @@ class Engine{
         this.panel.use(bodyparser.json());
         this.panel.use(flash());
         this.panel.use(session({secret: this.session_secret, resave: true, saveUninitialized: true}));
-        this.panel.listen(this.port, () => log.success(`Running the flake panel system on port: ${this.port}!`))
+        this.panel.listen(this.port, () => Log.success(`Running the flake panel system on port: ${this.port}!`))
     }
 
     listen(){
