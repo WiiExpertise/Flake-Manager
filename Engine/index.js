@@ -4,7 +4,7 @@ const flash = require('connect-flash');
 const _request = require("request");
 const path = require('path');
 
-var session = require('express-session');
+let session = require('express-session');
 const log = require('../Console');
 const Panel = require('./Panel');
 const Login = require('./Login');
