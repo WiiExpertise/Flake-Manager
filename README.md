@@ -10,7 +10,7 @@ All backend code (apart from the avatar API) was written by me, the frontend was
 
 Credit to jackie/@Pyrodash for the Avatar API code written by him.
 
-PREVIEW/SNIPPET: https://vimeo.com/323510405
+PREVIEW/SNIPPET: https://vimeo.com/331130734
 
 # How to use?
 
@@ -46,7 +46,6 @@ Just execute `npm install` to install the dependencies all at once.
 
 - Edit these options: https://gyazo.com/be0f42f821140809928bc09c2d992de1 to allow normal users to add any item in-game or to allow moderators to verify usernames/approval. Just set the options to 1 if you wish.
 
-- Edit the custom messages (if you wish).
 
 - Register your recaptcha keys from google recaptcha (v3). Add your site and secret key here: https://i.imgur.com/MBq4Oxm.png
 
