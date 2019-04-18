@@ -1,0 +1,182 @@
+/* Apologies for the unnecessary CSS, some was copy pasta ya kno? */
+
+.account-login {
+    width: 300px;
+    margin: 0 auto;
+}
+
+.table {
+    width: 500px;
+    margin: 0 auto;
+    margin-block-start: 10.00em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.account-login h1 {
+    text-align: center;
+    color: #000000;
+    font-size: 24px;
+    padding: 20px 0 20px 0;
+    margin-top: 0;
+   margin-bottom: 2rem;
+   font-weight: 300;
+   line-height: 1.25;
+   letter-spacing: -.1rem;
+   display:block;
+   margin-block-start: 1.00em;
+   margin-block-end: 0.83em;
+   margin-inline-start: 0px;
+   margin-inline-end: 0px;
+   font-size: 2rem;
+}
+
+.panel-button {
+    width: 300px;
+    margin-block-start: -1.50em;
+    margin-block-end: -5.90em;
+    margin-inline-start: 100px;
+    margin-inline-end: 3px;
+}
+
+
+
+
+
+
+
+
+.back-button {
+    width: 300px;
+    margin-block-start: 0.50em;
+    margin-block-end: -5.90em;
+    margin-inline-start: 100px;
+    margin-inline-end: 3px;
+}
+
+
+
+.account-login input[type="password"],
+.account-login input[type="text"] {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #dddddd;
+    margin-bottom: 15px;
+    box-sizing:border-box;
+}
+
+.account-login input[type="number"] {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #dddddd;
+    margin-bottom: 15px;
+    box-sizing:border-box;
+}
+
+.emu {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+  
+    
+  .fade {
+  -webkit-animation-delay: 0.2s;
+  -moz-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+  }
+
+  .fade1 {
+    -webkit-animation-delay: 0.5s;
+    -moz-animation-delay: 0.5s;
+    animation-delay: 0.5s;
+    }
+
+    .fade2 {
+        -webkit-animation-delay: 0.8s;
+        -moz-animation-delay: 0.8s;
+        animation-delay: 0.8s;
+        }
+    
+
+  @keyframes upward {
+    from {
+      opacity: 0;
+      -webkit-transform: translate3d(0, 100%, 0);
+      transform: translate3d(0, 100%, 0);
+    }
+  
+    to {
+      opacity: 1;
+      -webkit-transform: none;
+      transform: none;
+    }
+  }
+
+  .avatar-container {
+    min-width: 140px;
+    
+  }
+  .avatar-container > embed {
+    width: 160px;
+    height: 180px;
+    
+  }
+
+  #stats{
+      width: 300px; 
+      margin-block-start: 0.00em;
+      margin-block-end: 2.00em;
+      margin-inline-start: 500px;
+      margin-inline-end: 0px;
+    }
+
+    #verify{
+        width: 100px; 
+        margin-block-start: 0.00em;
+        margin-block-end: 0.00em;
+        margin-inline-start: 500px;
+        margin-inline-end: 0px;
+      }
+
+    .card{
+        margin-block-start: -25.00em;
+        margin-block-end: 0.00em;
+        margin-inline-start: 1000px;
+        margin-inline-end: 0px;
+    }
+
+    .navbar-light .navbar-nav .nav-link{
+        font-size:20px;
+        color:black;
+        font-family: 'Maiden Orange', cursive;
+    }
+    
+    .navbar-light .navbar-nav .nav-link:hover{
+        color:yellow;
+        font-family: 'Maiden Orange', cursive;
+    }
+    
+    .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link{
+        color:black;
+    }
+
+    .notup{
+        margin-top:0px;
+    }
+    
+    .border{ 
+        display:block;
+        border:none;
+        color:green;
+        height:1px;
+        background:black;
+        background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(#000), to(#fff));
+    }
+
+
+
+   
+  

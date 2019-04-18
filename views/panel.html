@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow" />
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="shortcut icon" href="/css_js/custom/img/favicon.jpg" type="image/vnd.microsoft.icon" />
+<link href="https://fonts.googleapis.com/css?family=Maiden+Orange" rel="stylesheet"> 
+<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Kreon:400,700" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"> </script>
+<link rel="icon" type="image/png" href="/css/penguin.png">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/custom.css">
+<script src="/js/custom.js"></script>
+<title> Account Panel | Flake</title>
+</head>
+<body>
+    <% if (!panel_type) { %>
+      <h3>Welcome back, <%= username %> </h3>
+              <div class='notup'>
+                  <span class="border"></span>
+              </div>
+              <div id="stats">
+                <table class="table table-bordered" style="margin: 0px auto;">
+                  <tbody>
+                    <tr>
+                      <th scope="row"><p>Player ID</p></th>
+                      <td><p> <%= id %> </p></td>
+                    </tr>
+                    <tr>
+                      <th scope="row"><p> Username</p></th>
+                      <td><p><%= username %> </p></td>
+                    </tr>
+                    <tr>
+                      <th scope="row"><p> Username Approved?</p></th>
+                      <td><p><%= approval %> </p></td>
+                    </tr>
+                    <tr>
+                      <th scope="row"><p> Account Activated?</p></th>
+                      <td><p><%= active %> </p></td>
+                    </tr>
+                    <tr>
+                      <th scope="row"><p> Email </p></th>
+                      <td colspan="2"><p> <%= email %></p></td>
+                    </tr>
+                    <tr>
+                      <th scope="row"><p> Coins</p></th>
+                      <td colspan="2"><p><%= coins %> </p></td>
+                    </tr>
+                    <tr>
+                      <th scope="row"><p> Rank</p></th>
+                      <td colspan="2"><p><%= rank %> </p></td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+            
+
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Your Penguin</h5>
+                  <img class="card-img-top" src="/avatar/<%= id %>" alt="Card image cap">
+              </div>
+            </div>
+
+            <table class="table table-hover" style="margin-block-start: -25.25em;">
+              
+                <thead>
+                    <tr>
+                        <th>User Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><form action="/logout" method="GET" name="reg" onsubmit=""> 
+                          <input type="submit" id="button" class="btn btn-primary" value="Logout">
+                        </form></td>
+                    </tr>
+                </tbody>
+                
+  
+
+  
+  
+          <tbody>
+              <tr>
+                  <td><form action="/update_password" method="GET" name="reg" onsubmit=""> 
+                    <input type="submit" id="button" class="btn btn-primary" value="Change Password">
+                  </form></td>
+              </tr>
+          </tbody>
+  
+
+
+        <tbody>
+            <tr>
+                <td><form action="/update_email" method="GET" name="reg" onsubmit=""> 
+                  <input type="submit" id="button" class="btn btn-primary" value="Change Email">
+                </form></td>
+            </tr>
+        </tbody>
+  
+
+  
+      <% if (add_item == 1) { %>
+  
+        <tbody>
+            <tr>
+                <td><form action="/add_item" method="GET" name="reg" onsubmit=""> 
+                  <input type="submit" id="button" class="btn btn-primary" value="Add Items">
+                </form></td>
+            </tr>
+        </tbody>
+        <% } %>
+  
+  
+            </table>
+
+
+      <% } %>
+
+      <% if (panel_type) { %>
+        <h3>Welcome back, <%= username %> </h3>
+              <div class='notup'>
+                  <span class="border"></span>
+              </div>
+              <div id="stats">
+                <table class="table table-bordered" style="margin: 0px auto;">
+                  <tbody>
+                    <tr>
+                      <th scope="row"><p>Player ID</p></th>
+                      <td><p> <%= id %> </p></td>
+                    </tr>
+                    <tr>
+                      <th scope="row"><p> Username</p></th>
+                      <td><p><%= username %> </p></td>
+                    </tr>
+                    <tr>
+                      <th scope="row"><p> Username Approved?</p></th>
+                      <td><p><%= approval %> </p></td>
+                    </tr>
+                    <tr>
+                      <th scope="row"><p> Account Activated?</p></th>
+                      <td><p><%= active %> </p></td>
+                    </tr>
+                    <tr>
+                      <th scope="row"><p> Email </p></th>
+                      <td colspan="2"><p> <%= email %></p></td>
+                    </tr>
+                    <tr>
+                      <th scope="row"><p> Coins</p></th>
+                      <td colspan="2"><p><%= coins %> </p></td>
+                    </tr>
+                    <tr>
+                      <th scope="row"><p> Rank</p></th>
+                      <td colspan="2"><p><%= rank %> </p></td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Your Penguin</h5>
+                  <img class="card-img-top" src="/avatar/<%= id %>" alt="Card image cap">
+              </div>
+            </div>
+
+            <table class="table table-hover" style="margin-block-start: -25.25em;">
+              
+              <thead>
+                  <tr>
+                      <th>Moderator Options</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td><form action="/logout" method="GET" name="reg" onsubmit=""> 
+                        <input type="submit" id="button" class="btn btn-primary" value="Logout">
+                      </form></td>
+                  </tr>
+              </tbody>
+              
+
+            <tbody>
+                <tr>
+                    <td><form action="/ban" method="GET" name="reg" onsubmit=""> 
+                      <input type="submit" id="button" class="btn btn-primary" value="Ban A User">
+                    </form></td>
+                </tr>
+            </tbody>
+
+<% if (verify_user == 1) { %>
+
+          <tbody>
+              <tr>
+                  <td><form action="/verify" method="GET" name="reg" onsubmit=""> 
+                    <input type="submit" id="button" class="btn btn-primary" value="Verify Usernames">
+                  </form></td>
+              </tr>
+          </tbody>
+          <% } %>
+
+
+        <tbody>
+            <tr>
+                <td><form action="/update_password" method="GET" name="reg" onsubmit=""> 
+                  <input type="submit" id="button" class="btn btn-primary" value="Change Password">
+                </form></td>
+            </tr>
+        </tbody>
+
+      <tbody>
+          <tr>
+              <td><form action="/update_email" method="GET" name="reg" onsubmit=""> 
+                <input type="submit" id="button" class="btn btn-primary" value="Change Email">
+              </form></td>
+          </tr>
+      </tbody>
+
+
+    <tbody>
+        <tr>
+            <td><form action="/unban" method="GET" name="reg" onsubmit=""> 
+              <input type="submit" id="button" class="btn btn-primary" value="Unban A User">
+            </form></td>
+        </tr>
+    </tbody>
+
+    <% if (add_item == 1) { %>
+
+
+      <tbody>
+          <tr>
+              <td><form action="/add_item" method="GET" name="reg" onsubmit=""> 
+                <input type="submit" id="button" class="btn btn-primary" value="Add Items">
+              </form></td>
+          </tr>
+      </tbody>
+      <% } %>
+
+
+          </table>
+          <% } %>
+     
+</body>
+</html>

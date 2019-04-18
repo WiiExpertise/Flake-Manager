@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow" />
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="shortcut icon" href="/css_js/custom/img/favicon.jpg" type="image/vnd.microsoft.icon" />
+<link href="https://fonts.googleapis.com/css?family=Maiden+Orange" rel="stylesheet"> 
+<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Kreon:400,700" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="icon" type="image/png" href="/css/penguin.png">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<script src="/js/bootstrap.min.js"> </script>
+<link rel="stylesheet" href="/css/custom.css">
+<script src="/css/custom.js"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=<%= site_key %>"></script>
+<script>
+  grecaptcha.ready(function () {
+      grecaptcha.execute('<%= site_key %>', { action: 'home' }).then(function (token) {
+          var recaptchaResponse = document.getElementById('recaptchaResponse');
+          recaptchaResponse.value = token;
+      });
+  });
+</script>
+<title> Login | Flake</title>
+</head>
+<body>
+
+
+
+        <% if (success_msg != '') { %>
+            <div class="alert alert-success" role="alert"><%= success_msg %></div>
+            <% } %>
+        
+            <% if (error_msg != '') { %>
+                <div class="alert alert-danger" role="alert"><%= error_msg %></div>
+                <% } %>
+
+
+    <div class="account-login">
+        <h1 class="text-center fade1 upward emu">Login</h1>
+        <form action="/" method="POST" name="reg" onsubmit="">
+            <input type="text" name="username" id="username" oninput="usernamePurity();" placeholder="Username" required>
+            <input type="password" name="password" id="password" oninput="passwordCheck()" placeholder="Password" required>
+            <input type="submit" class="btn btn-primary">
+            <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+        </form>
+    </div>
+    
+              
+             
+                
+
+              
+</body>
+</html>
