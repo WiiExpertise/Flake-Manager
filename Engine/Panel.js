@@ -10,7 +10,6 @@ class Panel{
         this.password = request.body.password;
         this.email = request.body.email;
         this.item = request.body.item;
-        // this.username => this.moderator = request.session.username;
         this.bannedUsername = request.body.username;
         this.hours = request.body.hours;
         this.reason = request.body.reason;
