@@ -37,7 +37,6 @@ class Engine{
         this.panel.set('views', path.join(__dirname, '../views'));
         this.panel.use('/css', express.static(path.join(__dirname, '../views/css')));
         this.panel.use('/js', express.static(path.join(__dirname, '../views/js')));
-        this.panel.use('/colors', express.static(path.join(__dirname, '../views/colors')));
         this.panel.use(bodyparser.urlencoded({extended : true}));
         this.panel.use(bodyparser.json());
         this.panel.use(flash());
