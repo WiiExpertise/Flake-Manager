@@ -35,17 +35,19 @@ class Login{
         this.username = this.request.body.username;
         this.password = this.request.body.password;
         let user = await this.database.penguin.findOne({where: {Username: this.username}});
-
+        let password = user.Password.replace(/^\$2y(.+)$/i, '$2a$1');
+       
+ 
         if(!await this.checkRow(`Username`, this.username)){
             this.type = 'username_not_found';
             this.response.render('index', this.displaySite());
         }
-
-        else if(!await bcrypt.compare(await this.getHash(), user.Password)){
+ 
+        else if(!await bcrypt.compare(await this.getHash(), password)){
             this.type = 'incorrect_password';
             this.response.render('index', this.displaySite());
         }
-
+ 
         else{
             this.request.session.loggedin = true;
             this.request.session.username = this.username;
