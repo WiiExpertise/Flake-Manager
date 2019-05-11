@@ -1,16 +1,13 @@
-# Flake-Manager
+# Flake - A user panel written in NodeJS for Houdini 
 
 
-A fully functional manager system written in nodeJS, sequelize used for database transactions and express.js for collecting http post requests. Has basic checks for whether the session is expired or not, it also does not give any UNAUTHORIZED access to certain parts, e.g. if you are not logged in, you'll be redirected to the login page, if you aren't a moderator and you're trying to access /verify or /unban it will redirect you to the main panel. 
+A fully functional manager system written in nodeJS, sequelize used for database transactions and express.js for collecting http post requests. Has basic checks for whether the session is expired or not, it also does not give any UNAUTHORIZED access to certain parts, e.g. if you are not logged in, you'll be redirected to the login page, if you aren't a moderator and you're trying to access /verify or /unban it will redirect you to the main panel. This was created for Houdini's ban, inventory and penguin table structure for it's features. Different interfaces by rendering the ejs file based on whether you are a moderator or normal user, allows owners (who use this manager) to choose whether a user is allowed to add items or not, allows admins to ban and unban users, allows normal users to change their password, email and verify usernames. The panel has an avatar to display a graphical representation of your penguin, it also displays your username, email, coins and rank. 
 
-This was created for Houdini's ban, inventory and penguin table structure for it's features. Different interfaces by rendering the ejs file based on whether you are a moderator or normal user, allows owners (who use this manager) to choose whether a user is allowed to add items or not, allows admins to ban and unban users, allows normal users to change their password, email and verify usernames. The panel has an avatar to display a graphical representation of your penguin, it also displays your username, email, coins and rank. 
+NOTE: Credit to jackie/@Pyrodash for the Avatar API code written by him.
 
-All backend code (apart from the avatar API) was written by me, the frontend was put together by me. 
+written by ~ ro, feel free to fork or use whatever code/assets you want from this.
 
-
-Credit to jackie/@Pyrodash for the Avatar API code written by him.
-
-PREVIEW/SNIPPET: https://vimeo.com/331130734
+preview: https://vimeo.com/331130734
 
 # How to use?
 
@@ -52,20 +49,9 @@ Just execute `npm install` to install the dependencies all at once.
 - When running this on your site, you need your sub-domain to be proxying off port 4444 (or whatever port you set in Config.js). So edit your nginx or apache configuration, add this line `proxy_pass http://localhost:3000/;`.
 
 
-
-
-# Updates
-
+LATEST UPDATE:
 
 - Updated VIMEO snippet to show the image rendered avatars instead of SWFs.
 - Better looking buttons added.
 - Site key is now configured in Config.js instead of the index.html file.
 
-
-
-This will remain an open source manager for anyone to use/steal parts of this for their own manager? I don't mind
-
-Enjoy it, if you need assistance with setting this up join https://solero.me/ discord and ping me, my tag is ro#0008
-
-
-~ ro
