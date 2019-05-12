@@ -132,11 +132,11 @@
                                         <% if (bans) { %>
                                         <% bans.forEach(function(bans){ %>
                                             <tr>
-                                                <td><%= bans.PenguinID %></td>
+                                                <td><%= bans.Username %></td>
                                                 <td><%= bans.Comment %></td>
                                                 <td>
                                                     <div class="stats"> 
-                                                        <a href='/unban/<%= bans.PenguinID %>'>Yes</a> &nbsp;                                     
+                                                        <a href='/unban/<%= bans.Username %>'>Yes</a> &nbsp;                                     
                                                             <input type="hidden" name="_method" value="DELETE" />
                                                     </div>
                                                 </td>
