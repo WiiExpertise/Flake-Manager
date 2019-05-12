@@ -39,7 +39,7 @@ class Panel{
         }
 
         if(this.type == '/unban'){
-            return{ error_msg : '', bans: await this.getBans(), update_msg: 'Choose users to unban', update_type: 'unban' };
+            return{ error_msg : '', bans: await this.bannedData(), update_msg: 'Choose users to unban', update_type: 'unban' };
         }
 
         if(this.type == '/verify'){
@@ -63,8 +63,17 @@ class Panel{
         return await this.database.penguin.findAll({where: {Approval: 0}});
     }
 
-    async getBans(){
-        return await this.database.ban.findAll({});
+    async bannedData(){
+        let bannedData = [];
+        let bans = await this.database.ban.findAll({})
+        for(let player in bans){
+            let penguin = await this.database.penguin.findAll({where: {ID: bans[player].PenguinID}});
+            for(let penguinData in penguin){
+                bans[player].Username = penguin[penguinData].Username;
+                bannedData.push(bans[player]);
+            }
+        }
+        return bannedData;
     }
 
     async ban(){
