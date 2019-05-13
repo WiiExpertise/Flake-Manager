@@ -62,17 +62,6 @@ class Login{
         let hash = password.substr(16, 16) + password.substr(0, 16);
         return hash;
     }
-
-
-    async checkRow(row, value){
-        let userCount = await this.database.penguin.count({ where: {[`${row}`]: [`${value}`]} });
-        if (userCount != 0){ 
-            return true; 
-        }
-        else{
-            return false;  
-        }
-    }
 }
 
 module.exports = Login;
