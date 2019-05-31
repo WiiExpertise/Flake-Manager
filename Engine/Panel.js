@@ -21,32 +21,32 @@ class Panel{
     }
 
     async displaySite(){
-        if(this.type == '/panel'){
+        if(this.type == '/panel' || this.type == '/panel/'){
             this.user = await this.getData();
             return {success_msg: '', error_msg: '', verify_user: this.verify_users, add_item: this.add_items, id: this.user.ID, username: this.user.Username, approval: this.boolean(this.user.Approval), active: this.boolean(this.user.Active), email: this.user.Email, coins: this.user.Coins, rank: this.user.Rank, panel_type: this.user.Moderator, site_key: this.engine.site_key}
         }
 
-        if(this.type == '/update_password'){
+        if(this.type == '/update_password' || this.type == '/update_password/'){
             return {error_msg : '', update_msg: 'Please enter a new password for your penguin.', update_type: 'password'}
         }
 
-        if(this.type == '/update_email'){
+        if(this.type == '/update_email' || this.type == '/update_email/'){
             return {error_msg : '', update_msg: 'Please enter a new email for your penguin.', update_type: 'email'}
         }
 
-        if(this.type == '/add_item'){
+        if(this.type == '/add_item' || this.type == '/add_item/'){
             return{error_msg : '', update_msg: 'Please enter a valid Item ID to add to your penguin.', update_type: 'add_item'}
         }
 
-        if(this.type == '/unban'){
+        if(this.type == '/unban' || this.type == '/unban/'){
             return{ error_msg : '', bans: await this.bannedData(), update_msg: 'Choose users to unban', update_type: 'unban' };
         }
 
-        if(this.type == '/verify'){
+        if(this.type == '/verify' || this.type == '/verify/'){
             return{ error_msg : '', approval: await this.getApprovals(), update_msg: 'Verify a users username to be approved in-game', update_type: 'verify'};
         }
 
-        if(this.type == '/ban'){
+        if(this.type == '/ban' || this.type == '/ban/'){
             return { error_msg : '', update_msg: 'Provide a ban for a user.', update_type: 'ban' };
         }
 
