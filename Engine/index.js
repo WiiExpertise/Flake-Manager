@@ -14,19 +14,15 @@ const Database = require('./Database');
 class Engine{
 
     constructor(config){
-        /* configuration */
         this.port = config.http.port;
         this.secret_key = config.http.secret_key;
         this.session_secret = config.http.session_secret;
         this.site_key = config.http.site_key;
-
-        /* custom settings */
         this.add_items = config.panel.add_items;
         this.verify_users = config.panel.verify_users;
         this.manage_penguins = config.panel.manage_penguins;
         this.redemption = config.panel.redemption;
         this.size = 120;
-
         this.database = new Database(config);
         this.panel = express();
         this.setup();
