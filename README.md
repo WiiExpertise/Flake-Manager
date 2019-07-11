@@ -1,9 +1,6 @@
 # Flake - A user panel written in NodeJS for Houdini 
 
-
-A fully functional manager system written in nodeJS, sequelize used for database transactions and express.js for collecting http post requests. Has basic checks for whether the session is expired or not, it also does not give any UNAUTHORIZED access to certain parts, e.g. if you are not logged in, you'll be redirected to the login page, if you aren't a moderator and you're trying to access /verify or /unban it will redirect you to the main panel. This was created for Houdini's ban, inventory and penguin table structure for it's features. Different interfaces by rendering the ejs file based on whether you are a moderator or normal user, allows owners (who use this manager) to choose whether a user is allowed to add items or not, allows admins to ban and unban users, allows normal users to change their password, email and verify usernames. The panel has an avatar to display a graphical representation of your penguin, it also displays your username, email, coins and rank. 
-
-NOTE: Credit to jackie/@Pyrodash for the Avatar API code written by him.
+NOTE: Credit to jackie/@Pyrodash for writing the Avatar API. 
 
 written by ~ ro, feel free to fork or use whatever code/assets you want from this.
 
@@ -49,9 +46,15 @@ Just execute `npm install` to install the dependencies all at once.
 - When running this on your site, you need your sub-domain to be proxying off port 4444 (or whatever port you set in Config.js). So edit your nginx or apache configuration, add this line `proxy_pass http://localhost:3000/;`.
 
 
-LATEST UPDATE:
+# Fixed Bugs: 
 
-- Updated VIMEO snippet to show the image rendered avatars instead of SWFs.
-- Better looking buttons added.
-- Site key is now configured in Config.js instead of the index.html file.
+ - Add item feature originally clashed with other peoples items, meaning you couldn't add a certain item if another person already had it, this has been fixed completely so it checks if you have the item through the item ID itself but also filtering through your penguin ID.
+
+- Incorrect ban times has been fixed, it now gives the correct time for how long the ban should last, based on hours given. Originally it used to calculate a very inaccurate timestamp for the expiry date, now it's accurate and adds on the correct amount of hours.
+
+# NEW FEATURES: 
+
+ - You can now (as a moderator) edit any normal user, moderators CANNOT edit each other. You can edit up to their username, password, email, coins, rank, if they are a moderator, if they have an approved username, if they have an activated account. Screenshots are here: https://imgur.com/a/8ap1RYY, https://imgur.com/a/ezJTQkV
+
+- You can now redeem a code through Flake's redemption system, that has checks for if the code exists, if it's been redeemed already or if it's expired. More to come, please lmk any suggestions.
 
