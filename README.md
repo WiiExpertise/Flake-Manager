@@ -1,4 +1,4 @@
-# Flake - A user panel written in NodeJS for Houdini 
+# Flake - A user panel for Houdini
 
 NOTE: Credit to jackie/@Pyrodash for writing the Avatar API. 
 
