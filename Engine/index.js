@@ -23,6 +23,8 @@ class Engine{
         /* custom settings */
         this.add_items = config.panel.add_items;
         this.verify_users = config.panel.verify_users;
+        this.manage_penguins = config.panel.manage_penguins;
+        this.redemption = config.panel.redemption;
         this.size = 120;
 
         this.database = new Database(config);
@@ -50,23 +52,6 @@ class Engine{
             response.render('index', new Login(request, response, this, 'login_page').displaySite());
         });
 
-        this.panel.post('/', (request, response) => {
-            let recaptcha_url = "https://www.google.com/recaptcha/api/siteverify?";
-            recaptcha_url += "secret=" + this.secret_key + "&";
-            recaptcha_url += "response=" + request.body.recaptcha_response + "&";
-            recaptcha_url += "remoteip=" + request.connection.remoteAddress;
-            _request(recaptcha_url, (error, resp, body) => {
-                let recaptcha = JSON.parse(body);
-                if (recaptcha.success){
-                    new Login(request, response, this).login();
-                }
-                else{
-                    response.render('index', new Login(request, response, this, 'incorrect_captcha').displaySite());
-                }
-            });
-        });
-        
-
         this.panel.get('/panel', async (request, response) => {
             if (request.session.loggedin) {
                 response.render('panel', await new Panel(request, response, this, request._parsedUrl.pathname).displaySite());
@@ -74,10 +59,6 @@ class Engine{
             else {
                 response.redirect('/');
             }
-        });
-
-        this.panel.post('/update', async (request, response) => {
-            await new Panel(request, response, this).updateData();
         });
 
         this.panel.get('/update_password', async (request, response) => {
@@ -98,9 +79,33 @@ class Engine{
             }
         });
 
+        this.panel.get('/redemption', async (request, response) => {
+            if (request.session.loggedin) {
+                response.render('update', await new Panel(request, response, this, request._parsedUrl.pathname).displaySite());
+            }
+            else {
+                response.redirect('/');
+            }
+        });
+
         this.panel.get('/unban', async (request, response) => {
             if (request.session.username){
-                let account = await new Panel(request, response, this).getData();
+                let account = await new Panel(request, response, this).getById();
+                if(account.Moderator == 1){
+                    response.render('update', await new Panel(request, response, this, request._parsedUrl.pathname).displaySite());
+                }
+                else{
+                    response.redirect('/panel');
+                }
+            }
+            else{
+                response.redirect('/');
+            }
+        });
+
+        this.panel.get('/manage', async (request, response) => {
+            if (request.session.username){
+                let account = await new Panel(request, response, this).getByUsername();
                 if(account.Moderator == 1){
                     response.render('update', await new Panel(request, response, this, request._parsedUrl.pathname).displaySite());
                 }
@@ -115,7 +120,7 @@ class Engine{
 
         this.panel.get('/verify', async (request, response) => {
             if (request.session.username){
-                let account = await new Panel(request, response, this).getData();
+                let account = await new Panel(request, response, this).getByUsername();
                 if(account.Moderator == 1){
                     response.render('update', await new Panel(request, response, this, request._parsedUrl.pathname).displaySite());
                 }
@@ -131,7 +136,7 @@ class Engine{
 
         this.panel.get('/ban', async(request, response) => {
             if (request.session.username){
-                let account = await new Panel(request, response, this).getData();
+                let account = await new Panel(request, response, this).getByUsername();
                 if(account.Moderator == 1){
                     response.render('update', await new Panel(request, response, this, request._parsedUrl.pathname).displaySite());
                 }
@@ -146,7 +151,7 @@ class Engine{
 
         this.panel.get('/unban/(:id)', async (request, response) => {
             if (request.session.username){
-                let account = await new Panel(request, response, this).getData();
+                let account = await new Panel(request, response, this).getByUsername();
                 if(account.Moderator == 1){
                     await new Panel(request, response, this).unban()
                 }
@@ -159,19 +164,39 @@ class Engine{
             }
         });
 
-        this.panel.post('/ban', async (request, response) => {
-            let account = await new Panel(request, response, this).getData();
-            if(account.Moderator == 1){
-                await new Panel(request, response, this).ban()
+        this.panel.get('/manage/(:id)', async (request, response) => {
+            if (request.session.username){
+                let account = await new Panel(request, response, this).getByUsername();
+                if(account.Moderator == 1){
+                    response.render('update', await new Panel(request, response, this, 'manage_penguin').displaySite());
+                }
+                else{
+                    response.redirect('/panel');
+                }
             }
             else{
-                response.redirect('/panel')
+                response.redirect('/');
+            }
+        });
+
+        this.panel.get('/manage/edit/(:type)/(:id)', async (request, response) => {
+            if (request.session.username){
+                let account = await new Panel(request, response, this).getByUsername();
+                if(account.Moderator == 1){
+                    await new Panel(request, response, this).edit();
+                }
+                else{
+                    response.redirect('/panel');
+                }
+            }
+            else{
+                response.redirect('/');
             }
         });
 
         this.panel.get('/verify/(:id)', async (request, response) => {
             if (request.session.username){
-                let account = await new Panel(request, response, this).getData();
+                let account = await new Panel(request, response, this).getByUsername();
                 if(account.Moderator == 1){
                     await new Panel(request, response, this).verify()
                 }
@@ -204,12 +229,50 @@ class Engine{
         });
 
         this.panel.get('/avatar/(:id)', async (request, response) => {
-            let penguin = await new Panel(request, response, this).getData();
+            let penguin = await new Panel(request, response, this).getById();
             const avatar = new Avatar(penguin, this.size);
             let img = await avatar.build()
             response.set('Content-Type', 'image/png');
             response.set('Content-Length', img.length);
             response.end(img);
+        });
+
+        this.panel.post('/', (request, response) => {
+            let recaptcha_url = "https://www.google.com/recaptcha/api/siteverify?";
+            recaptcha_url += "secret=" + this.secret_key + "&";
+            recaptcha_url += "response=" + request.body.recaptcha_response + "&";
+            recaptcha_url += "remoteip=" + request.connection.remoteAddress;
+            _request(recaptcha_url, (error, resp, body) => {
+                let recaptcha = JSON.parse(body);
+                if (recaptcha.success){
+                    new Login(request, response, this).login();
+                }
+                else{
+                    response.render('index', new Login(request, response, this, 'incorrect_captcha').displaySite());
+                }
+            });
+        });
+
+        this.panel.post('/redeem', async (request, response) => {
+            await new Panel(request, response, this).redeem();
+        });
+
+        this.panel.post('/update', async (request, response) => {
+            await new Panel(request, response, this).updateData();
+        });
+
+        this.panel.post('/manage/update/(:type)/(:id)', async (request, response) => {
+            await new Panel(request, response, this).playerUpdateData();
+        });
+    
+        this.panel.post('/ban', async (request, response) => {
+            let account = await new Panel(request, response, this).getByUsername();
+            if(account.Moderator == 1){
+                await new Panel(request, response, this).ban()
+            }
+            else{
+                response.redirect('/panel')
+            }
         });
     }
 }

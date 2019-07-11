@@ -104,6 +104,17 @@
                 </form></td>
             </tr>
         </tbody>
+
+        <% if (redemption == 1) { %>
+  
+          <tbody>
+              <tr>
+                  <td><form action="/redemption" method="GET" name="reg" onsubmit=""> 
+                    <input type="submit" id="button" class="btn btn-primary" value="Unlock Redemption Code">
+                  </form></td>
+              </tr>
+          </tbody>
+          <% } %>
   
 
   
@@ -117,6 +128,7 @@
             </tr>
         </tbody>
         <% } %>
+        
   
   
             </table>
@@ -184,6 +196,17 @@
                       </form></td>
                   </tr>
               </tbody>
+              <% if (manage_penguins == 1) { %>
+
+                <tbody>
+                    <tr>
+                        <td><form action="/manage" method="GET" name="reg" onsubmit=""> 
+                          <input type="submit" id="button" class="btn btn-primary" value="Manage Penguins">
+                        </form></td>
+                    </tr>
+                </tbody>
+                <% } %>
+      
               
 
             <tbody>
@@ -193,6 +216,7 @@
                     </form></td>
                 </tr>
             </tbody>
+            
 
 <% if (verify_user == 1) { %>
 

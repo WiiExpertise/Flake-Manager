@@ -46,6 +46,26 @@
         </form>
     </div>
     <% } %>
+
+    <% if (update_type == 'redemption') { %>
+        <div class="account-login">
+            <h1 class="text-center fade1 upward emu">Redeem A Code</h1>
+            <form action="/redeem" method="POST" name="reg" onsubmit="">
+                <input type="text"  name="code" id="code" placeholder="Code" required>
+                <input type="submit" class="btn btn-primary">
+            </form>
+        </div>
+        <% } %>
+
+    <% if (update_type == 'edit_field') { %>
+        <div class="account-login">
+            <h1 class="text-center fade1 upward emu">Edit this players <%= row %> </h1>
+            <form action="/manage/update/<%= row %>/<%= id %>" method="POST" name="reg" onsubmit="">
+                <input type="player_data" name="player_data" id="player_data" placeholder="<%= row %>" required>
+                <input type="submit" class="btn btn-primary">
+            </form>
+        </div>
+        <% } %>
     
 
 
@@ -149,6 +169,139 @@
                 
                     <% } %>
                     <% } %>
+
+                    <% if (update_type == 'manage') { %>
+                        <div class="table"> 
+            
+                        <div id="verify">
+                                    <table class="table table-bordered" style="margin: 0px auto;">
+         
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Username</th>
+                                                <th>Nickname</th>
+                                                <th>Email</th>
+                                                <th>Avatar</th>
+                                                <th>Edit?</th>
+                                            </tr>
+                                            
+                                    
+                                            <% if (penguin) { %>
+                                            <% penguin.forEach(function(penguin){ %>
+                                                <tr>
+                                                    <td><%= penguin.ID %></td>
+                                                    <td><%= penguin.Username %></td>
+                                                    <td><%= penguin.Nickname %></td>
+                                                    <td><%= penguin.Email %></td>
+                                                    <td><img class="card-img-top" style="width: 100px;" src="/avatar/<%=penguin.ID%>" alt="Card image cap"></td>
+
+                                                    <td>
+                                                        <div class="stats"> 
+                                                            <a href='/manage/<%= penguin.ID %>'>Yes</a> &nbsp;                                     
+                                                                <input type="hidden" name="_method" value="DELETE" />
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            <% }) %>
+                                         
+                                        </table>
+                        </div>
+                    </div>
+                    
+                        <% } %>
+                        <% } %>
+
+                        <% if (update_type == 'manage_penguin') { %>
+                <div class="table"> 
+                <div id="verify">
+                    <table class="table table-bordered" style="margin-inline-start: -200px;">
+
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Password</th>
+                                <th>Email</th>
+                                <th>Approved Username?</th>
+                                <th>Activated User?</th>
+                                <th>Moderator?</th>
+                                <th>Coins</th>
+                                <th>Rank</th>
+                            </tr>
+                            
+                    
+                            <% if (penguin) { %>
+                                <tr>
+                                    <td><%= penguin.ID %></td>
+                                    <td><%= penguin.Username %></td>
+                                    <td>**********</td>
+                                    <td><%= penguin.Email %></td>
+                                    <td><%= approval %></td>
+                                    <td><%= active %></td>
+                                    <td><%= moderator %></td>
+                                    <td><%= penguin.Coins %></td>
+                                    <td><%= penguin.Rank %></td>
+                                </tr>
+                                <tr>
+                                   <td> 
+                                    -
+                                </td>
+                                    <td>
+                                    <div class="stats"> 
+                                        <a href='/manage/edit/Username/<%= penguin.ID %>'>Edit Username</a> &nbsp;                            
+                                            <input type="hidden" name="_method" value="DELETE" />
+                                    </div>
+                                </td>
+                                <td>
+                                        <div class="stats"> 
+                                            <a href='/manage/edit/Password/<%= penguin.ID %>'>Edit Password</a> &nbsp;                            
+                                                <input type="hidden" name="_method" value="DELETE" />
+                                        </div>
+                                    </td>
+                                <td>
+                                        <div class="stats"> 
+                                            <a href='/manage/edit/Email/<%= penguin.ID %>'>Edit Email</a> &nbsp;                            
+                                                <input type="hidden" name="_method" value="DELETE" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="stats"> 
+                                            <a href='/manage/edit/Approval/<%= penguin.ID %>'>Change Username Approval</a> &nbsp;                            
+                                                <input type="hidden" name="_method" value="DELETE" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                            <div class="stats"> 
+                                                <a href='/manage/edit/Active/<%= penguin.ID %>'>Change User Activation</a> &nbsp;                            
+                                                    <input type="hidden" name="_method" value="DELETE" />
+                                            </div>
+                                        </td>
+                                            <td>
+                                                    <div class="stats"> 
+                                                        <a href='/manage/edit/Moderator/<%= penguin.ID %>'>Change Moderator</a> &nbsp;                            
+                                                            <input type="hidden" name="_method" value="DELETE" />
+                                                    </div>
+                                                </td>
+                                            <td>
+                                                    <div class="stats"> 
+                                                        <a href='/manage/edit/Coins/<%= penguin.ID %>'>Edit Coins</a> &nbsp;                            
+                                                            <input type="hidden" name="_method" value="DELETE" />
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                        <div class="stats"> 
+                                                            <a href='/manage/edit/Rank/<%= penguin.ID %>'>Edit Rank</a> &nbsp;                            
+                                                                <input type="hidden" name="_method" value="DELETE" />
+                                                        </div>
+                                                    </td>
+                                </tr>
+
+                        </table>
+        </form>
+        </div>
+    </div>
+                            <% } %>
+                            <% } %>
+                        
     
               
              

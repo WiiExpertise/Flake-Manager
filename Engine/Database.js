@@ -29,6 +29,8 @@ class Database{
         this.penguin = await this.databaseConnection.import('../Data/Penguin');
         this.inventory = await this.databaseConnection.import('../Data/Inventory');
         this.ban = await this.databaseConnection.import('../Data/Ban');
+        this.redemption_code = await this.databaseConnection.import('../Data/RedemptionCode');
+        this.penguin_redemption = await this.databaseConnection.import('../Data/PenguinRedemption');
     }
 
 

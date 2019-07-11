@@ -5,13 +5,14 @@
     margin: 0 auto;
 }
 
+
 .table {
-    width: 500px;
-    margin: 0 auto;
-    margin-block-start: 10.00em;
-    margin-block-end: 0.83em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
+  width: 500px;
+  margin: 0 auto;
+  margin-block-start: 10.00em;
+  margin-block-end: 0.83em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
 }
 
 .account-login h1 {
@@ -58,6 +59,15 @@
 
 
 .account-login input[type="password"],
+.account-login input[type="text"] {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #dddddd;
+    margin-bottom: 15px;
+    box-sizing:border-box;
+}
+
+.account-login input[type="player_data"],
 .account-login input[type="text"] {
     width: 100%;
     padding: 15px;
