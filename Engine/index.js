@@ -90,7 +90,7 @@ class Engine{
 
         this.panel.get('/unban', async (request, response) => {
             if (request.session.username){
-                let account = await new Panel(request, response, this).getById();
+                let account = await new Panel(request, response, this).getByUsername();
                 if(account.Moderator == 1){
                     response.render('update', await new Panel(request, response, this, request._parsedUrl.pathname).displaySite());
                 }
