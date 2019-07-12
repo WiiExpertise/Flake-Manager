@@ -254,6 +254,17 @@
             </form></td>
         </tr>
     </tbody>
+              
+              <% if (redemption == 1) { %>
+  
+          <tbody>
+              <tr>
+                  <td><form action="/redemption" method="GET" name="reg" onsubmit=""> 
+                    <input type="submit" id="button" class="btn btn-primary" value="Unlock Redemption Code">
+                  </form></td>
+              </tr>
+          </tbody>
+          <% } %>
 
     <% if (add_item == 1) { %>
 
