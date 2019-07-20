@@ -291,7 +291,7 @@ class Panel{
         try{
             await this.database.penguin.update({[`${this.row}`]: this.data}, {where: {ID: this.id}});
         }
-        catch{
+        catch(e){
             this.type = 'error';
             this.response.render('update', await this.displaySite());
         }
