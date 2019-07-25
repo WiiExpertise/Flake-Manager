@@ -1,21 +1,19 @@
 {
   "name": "flake-manager",
-  "version": "2.0.0",
-  "description": "A user panel written for Houdini",
+  "version": "3.0.0",
+  "description": "A user panel for Houdini",
   "main": "Boot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/rsakeys/Flake-Manager.git"
+    "url": "git+https://github.com/rsakeys/Flake-Manager.git"
   },
   "keywords": [
     "flake",
     "cpps",
     "houdini",
-    "cpps",
-    "manager",
     "manager",
     "user",
     "panel"
@@ -38,7 +36,8 @@
     "express-session": "^1.16.2",
     "md5": "^2.2.1",
     "mysql2": "^1.6.5",
-    "sequelize": "^5.10.1",
+    "nodemailer": "^6.3.0",
+    "sequelize": "^5.10.3",
     "url-exists": "^1.0.3"
   }
 }

@@ -1,6 +1,10 @@
 const md5 = require('md5');
 const bcrypt = require('bcrypt');
 
+const nodemailer = require("nodemailer");
+
+/* TODO: Create seperate classes for each manager feature instead of bundling it in one class */
+
 class Panel{
     constructor(request, response, engine, type){
         this.response = response;
@@ -24,6 +28,10 @@ class Panel{
         this.verify_users = engine.verify_users;
         this.manage_penguins = engine.manage_penguins;
         this.redemption = engine.redemption;
+        this.gmail_user = engine.gmail_user;
+        this.gmail_pass = engine.gmail_pass;
+        this.domain = engine.domain;
+        this.cpps_name = engine.cpps_name;
     }
 
     async displaySite(){
@@ -40,9 +48,34 @@ class Panel{
             return {error_msg : '', update_msg: 'Please enter the redemption code.', update_type: 'redemption'}
         }
 
+        if(this.type == '/reset' || this.type == '/reset/'){
+            return{error_msg:'', update_msg: 'Please enter the email address you registered your account with', update_type:'reset'}
+        }
+
+        if(this.type == 'email_sent'){
+            return{error_msg:'', update_msg: `A reset password link was succesfully sent to ${this.email}, please allow a few minutes for it to receive.`, update_type:'reset'}
+        }
+
+        if(this.type == 'password_updated'){
+            return{error_msg:'', update_msg: 'Password was successfully updated', update_type: ''}
+        }
+
+        if(this.type == 'false_email'){
+            return{error_msg:`The email ${this.email} is not registered in our system`, update_msg: ``, update_type:`reset`}
+        }
+
         if(this.type == 'manage_penguin'){
             this.user = await this.getById();
             return{error_msg: '', update_msg: `Update certain settings for the user: ${this.user.Username}`, approval: this.boolean(this.user.Approval), moderator: this.boolean(this.user.Moderator), active: this.boolean(this.user.Active), penguin: this.user, update_type: 'manage_penguin'}
+        }
+
+        if(this.type == 'choose_password'){
+            this.user = await this.getById_(); /* get by the unique ID used in the email reset link */ 
+            return{error_msg: '', update_msg: `Choose a new password for your user ${this.user.Username}`, reset_id: this.id, update_type: 'reset_password'}
+        }
+
+        if(this.type == 'expiry'){
+            return{error_msg:'Please request a new password reset link, the expiry time is up.', update_msg:'', update_type:''}
         }
 
         if(this.type == '/update_email' || this.type == '/update_email/'){
@@ -125,7 +158,7 @@ class Panel{
     }
 
     async ban(){
-        if(await this.checkBanExistance()){
+        if(await this.checkRow(`Username`, this.bannedUsername)){
             let banned = await this.database.penguin.findOne({where: {Username: this.bannedUsername}});
             this.user = await this.getByUsername();
             let date = new Date().getTime();
@@ -153,6 +186,15 @@ class Panel{
         }
     }
 
+    async reset(){
+        this.user = await this.getById_();
+        await this.database.reset_pass.destroy({where: {ResetID: this.id}});
+        let password = await this.bcrypt(this.password);
+        await this.database.penguin.update({Password: password}, {where: {Username: this.user.Username}});
+        this.type = 'password_updated';
+        this.response.render('update', await this.displaySite());
+    }
+
     async updateData(){
         if(this.password){
             let password = await this.bcrypt(this.password);
@@ -168,6 +210,25 @@ class Panel{
 
         else if(this.item){
             this.addItem();
+        }
+    }
+
+    async send_reset(){
+        if(await this.checkRow(`Email`, this.email)){
+            let user = await this.database.penguin.findOne({where: {Email: this.email}}); 
+            let id = Math.random().toString(26).slice(2);
+            let date = new Date().getTime();
+            date += (12 * 60 * 60 * 1000);
+            let transporter = nodemailer.createTransport({service: 'Gmail', auth: {user: this.gmail_user, pass: this.gmail_pass}});
+            await transporter.sendMail({to: this.email, subject: `Reset your password for ${this.cpps_name}`, text: `You requested to reset your password for your account under the email: ${this.email}. Please head over to http://${this.domain}/reset/${id} to choose a new password. If this was not you, please disregard this email.`, }); /* Change to a more professional written email if you like */
+            await this.database.reset_pass.create({PenguinID: user.ID, ResetID: id, Expires: date});
+            this.type = 'email_sent';
+            this.response.render('update', await this.displaySite());
+
+        }
+        else{
+            this.type = 'false_email';
+            this.response.render('update', await this.displaySite());
         }
     }
 
@@ -270,6 +331,16 @@ class Panel{
             return 'No';
         }
     }
+
+    async password_reset_expiry(){
+        let userData = await this.database.reset_pass.findOne({where: {ResetID: this.id}});
+        if(userData.Expires < new Date().getTime()){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
     
     async edit(){
         if(this.row == 'Approval' || this.row == 'Active' || this.row == 'Moderator'){
@@ -322,10 +393,13 @@ class Panel{
     }
 
 
-    async checkBanExistance(){
-        let user = await this.database.penguin.findOne({where: {Username: this.bannedUsername}});
-        if(user){
-            return true;
+    async checkRow(row, value){
+        let userCount = await this.database.penguin.count({ where: {[`${row}`]: [`${value}`]} });
+        if (userCount != 0){ 
+            return true; 
+        }
+        else{
+            return false;  
         }
     }
 
@@ -339,6 +413,12 @@ class Panel{
 
     async getById(){
         let user = await this.database.penguin.findOne({where: {ID: this.id}});
+        return user;
+    }
+
+    async getById_(){
+        let userData = await this.database.reset_pass.findOne({where: {ResetID: this.id}});
+        let user = await this.database.penguin.findOne({where: {ID: userData.PenguinID}});
         return user;
     }
 }

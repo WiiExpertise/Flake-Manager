@@ -46,11 +46,17 @@
         <form action="/" method="POST" name="reg" onsubmit="">
             <input type="text" name="username" id="username" oninput="usernamePurity();" placeholder="Username" required>
             <input type="password" name="password" id="password" oninput="passwordCheck()" placeholder="Password" required>
-            <input type="submit" class="btn btn-primary">
+            <input type="submit" value="Login" class="btn btn-primary">
             <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
         </form>
-    </div>
+<br>
+    <% if (reset == 1) { %>
+    <form action="/reset" method="GET" name="reg" onsubmit=""> 
+        <input type="submit" class="btn btn-primary" value="Reset your password">
+      </form>
+      <% } %>
     
+    </div>
               
              
                 

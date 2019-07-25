@@ -22,6 +22,11 @@ class Engine{
         this.verify_users = config.panel.verify_users;
         this.manage_penguins = config.panel.manage_penguins;
         this.redemption = config.panel.redemption;
+        this.reset = config.reset_password_mail.reset_password;
+        this.gmail_user = config.reset_password_mail.gmail_user;
+        this.gmail_pass = config.reset_password_mail.gmail_pass;
+        this.domain = config.reset_password_mail.sub_domain;
+        this.cpps_name = config.reset_password_mail.cpps_name;
         this.size = 120;
         this.database = new Database(config);
         this.panel = express();
@@ -31,7 +36,7 @@ class Engine{
 
     setup(){
         this.panel.engine('html', require('ejs').renderFile);
-        this.panel.set('view engine', 'html'); // reading ejs files 
+        this.panel.set('view engine', 'html'); 
         this.panel.set('views', path.join(__dirname, '../views'));
         this.panel.use('/css', express.static(path.join(__dirname, '../views/css')));
         this.panel.use('/js', express.static(path.join(__dirname, '../views/js')));
@@ -81,6 +86,39 @@ class Engine{
             }
             else {
                 response.redirect('/');
+            }
+        });
+
+        this.panel.get('/reset', async (request, response) => {
+            if(this.reset == 1){
+                response.render('update', await new Panel(request, response, this, request._parsedUrl.pathname).displaySite());
+            }
+            else{
+                response.redirect('/')
+            }
+        });
+
+        this.panel.get('/reset/(:id)', async (request, response) => {
+            if(this.reset == 1){
+                let expiry = await new Panel(request, response, this).password_reset_expiry();
+                if(expiry){
+                    response.render('update', await new Panel(request, response, this, 'choose_password').displaySite());
+                }
+                else{
+                    response.render('update', await new Panel(request, response, this, 'expiry').displaySite());
+                }
+            }
+            else{
+                response.redirect('/')
+            }
+        });
+
+        this.panel.post('/reset_password/(:id)', async (request, response) => {
+            if(this.reset == 1){
+                await new Panel(request, response, this).reset()
+            }
+            else{
+                response.redirect('/')
             }
         });
 
@@ -255,6 +293,10 @@ class Engine{
 
         this.panel.post('/update', async (request, response) => {
             await new Panel(request, response, this).updateData();
+        });
+
+        this.panel.post('/reset', async (request, response) => {
+            await new Panel(request, response, this).send_reset();
         });
 
         this.panel.post('/manage/update/(:type)/(:id)', async (request, response) => {

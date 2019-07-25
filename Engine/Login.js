@@ -11,23 +11,24 @@ class Login{
         this.type = type;
         this.engine = engine;
         this.database = engine.database;
+        this.reset = engine.reset;
     }
 
     displaySite(){
         if(this.type == 'login_page'){
-            return {success_msg: '', error_msg: '', site_key: this.engine.site_key}
+            return {success_msg: '', error_msg: '', reset: this.reset, site_key: this.engine.site_key}
         }
 
         if(this.type == 'incorrect_captcha'){
-            return {error_msg : 'The captcha detects you are a bot, please try again.', success_msg: '', site_key: this.engine.site_key}
+            return {error_msg : 'The captcha detects you are a bot, please try again.', reset: this.reset, success_msg: '', site_key: this.engine.site_key}
         }
 
         if(this.type == 'username_not_found'){
-            return {error_msg : 'This username was not found in our records.', success_msg: '', site_key: this.engine.site_key}
+            return {error_msg : 'This username was not found in our records.', success_msg: '', reset: this.reset, site_key: this.engine.site_key}
         }
         
         if(this.type == 'incorrect_password'){
-            return {error_msg : 'The password you entered is incorrect.', success_msg: '', site_key: this.engine.site_key}
+            return {error_msg : 'The password you entered is incorrect.', success_msg: '', reset: this.reset, site_key: this.engine.site_key}
         }
     }
 

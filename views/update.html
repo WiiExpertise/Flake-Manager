@@ -47,6 +47,17 @@
     </div>
     <% } %>
 
+    <% if (update_type == 'reset_password') { %>
+        <div class="account-login">
+            <h1 class="text-center fade1 upward emu">Update Your Password</h1>
+            <form action="/reset_password/<%= reset_id %>" method="POST" name="reg" onsubmit="">
+                <input type="password" name="password" id="password" oninput="passwordCheck()" placeholder="Password" required>
+                <input type="password" name="password_confirm" id="password_confirm" oninput="passwordConfirm()" placeholder="Confirm Your Password" required>
+                <input type="submit" class="btn btn-primary">
+            </form>
+        </div>
+        <% } %>
+
     <% if (update_type == 'redemption') { %>
         <div class="account-login">
             <h1 class="text-center fade1 upward emu">Redeem A Code</h1>
@@ -78,6 +89,16 @@
             </form>
         </div>
         <% } %>
+
+        <% if (update_type == 'reset') { %>
+            <div class="account-login">
+                <h1 class="text-center fade1 upward emu">Enter email:</h1>
+                <form action="/reset" method="POST" name="reg" onsubmit="">
+                    <input type="text" name="email" id="email" oninput="emailCheck();" placeholder="Email" required>
+                    <input type="submit" class="btn btn-primary" class="btn btn-primary">
+                </form>
+            </div>
+            <% } %>
 
         <% if (update_type == 'add_item') { %>
             <div class="account-login">
