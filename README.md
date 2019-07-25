@@ -58,3 +58,13 @@ Just execute `npm install` to install the dependencies all at once.
 
 - You can now redeem a code through Flake's redemption system, that has checks for if the code exists, if it's been redeemed already or if it's expired. More to come, please lmk any suggestions.
 
+# RESET PASSWORD FEATURE:
+
+- Using nodemailer and gmails service, you can have an option to reset your password without logging into the panel, for this to work you need a GMAIL account dedicated for the CPPS reset password links, this will be used to email the links, the details of the account will be specified in Config.js so that it's usable. Remember this feature is disabled by default so if you want to enable it, you need to set reset_password to 1 in Config.js
+
+# HOW TO SETUP?
+
+- The reset password feature uses a table to keep track of reset password links expiry and usability, please insert this new table into your database (assuming you use Houdini) https://pastebin.com/KhdRsDLE. Then setup your GMAIL account, configure the username and password in Config.js and make sure you set the sub_domain field to the sub domain you are running the manager off i.e. manager.cpps.com. This is so that it can send the correct reset password link leading to i.e. manager.cpps.com/reset/unique_id. 
+
+Any suggestions, LMK!
+
