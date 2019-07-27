@@ -259,15 +259,23 @@ class Panel{
     }
     
     async redeem(){
+        let itemsList = []
         this.user = await this.getByUsername();
         let code = await this.database.redemption_code.findOne({where: {Code: this.code}}); 
         let codesRedeemed = await this.database.penguin_redemption.findAll({where: {PenguinID: this.user.ID}}); 
+        let items = await this.database.redemption_award.findAll({where: {CodeID: code.ID}});
+        for(let item in items){
+            itemsList.push(items[item].Award);
+        }
         if(await this.codeExists(code)){
             if(await this.checkIfRedeemed(codesRedeemed, code)){
                 if(await this.checkExpiry(code)){
                     let addedCoins = this.user.Coins + code.Coins
                     await this.database.penguin_redemption.create({PenguinID: this.user.ID, CodeID: code.ID});
                     await this.database.penguin.update({Coins: addedCoins}, {where: {ID: this.user.ID}});
+                    for (let item in itemsList){
+                        await this.database.inventory.create({PenguinID: this.user.ID, ItemID: itemsList[item]});
+                    }
                     this.type = 'redeemed';
                     this.response.render('update', await this.displaySite());
                 }

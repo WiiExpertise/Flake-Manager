@@ -31,6 +31,7 @@ class Database{
         this.ban = await this.databaseConnection.import('../Data/Ban');
         this.redemption_code = await this.databaseConnection.import('../Data/RedemptionCode');
         this.penguin_redemption = await this.databaseConnection.import('../Data/PenguinRedemption');
+        this.redemption_award = await this.databaseConnection.import('../Data/RedemptionAward');
         this.reset_pass = await this.databaseConnection.import('../Data/Reset');
     }
 
