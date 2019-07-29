@@ -149,7 +149,11 @@ class Panel{
         let bans = await this.database.ban.findAll({})
         for(let player in bans){
             let penguin = await this.database.penguin.findAll({where: {ID: bans[player].PenguinID}});
+            let moderator = await this.database.penguin.findAll({where: {ID: bans[player].ModeratorID}});
             for(let penguinData in penguin){
+                for(let penguinData in moderator){
+                    bans[player].Moderator_Username = moderator[penguinData].Username
+                }
                 bans[player].Username = penguin[penguinData].Username;
                 bannedData.push(bans[player]);
             }
