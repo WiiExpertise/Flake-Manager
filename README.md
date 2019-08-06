@@ -20,22 +20,7 @@ preview: https://vimeo.com/331130734
 
 Just execute `npm install` to install the dependencies all at once.
     
-    
-    "bcrypt": "^3.0.4",
-    "canvas": "^2.3.1",
-    "colors": "^1.3.3",
-    "connect-flash": "^0.1.1",
-    "download": "^7.1.0",
-    "ejs": "^2.6.1",
-    "express": "^4.16.4",
-    "express-session": "^1.15.6",
-    "md5": "^2.2.1",
-    "mysql2": "^1.6.5",
-    "request": "^2.88.0",
-    "sequelize": "^4.43.0",
-    "url-exists": "^1.0.3"
-
-
+   
 - The only file you have to edit is Config.js, what you need to edit in there is the secret session key in there, it has to be something random and secure so get any type of password/key from https://randomkeygen.com/ 
 
 - Edit these options: https://gyazo.com/be0f42f821140809928bc09c2d992de1 to allow normal users to add any item in-game or to allow moderators to verify usernames/approval. Just set the options to 1 if you wish.
@@ -66,5 +51,6 @@ Just execute `npm install` to install the dependencies all at once.
 
 - The reset password feature uses a table to keep track of reset password links expiry and usability, please insert this new table into your database (assuming you use Houdini) https://pastebin.com/KhdRsDLE. Then setup your GMAIL account, configure the username and password in Config.js and make sure you set the sub_domain field to the sub domain you are running the manager off i.e. manager.cpps.com. This is so that it can send the correct reset password link leading to i.e. manager.cpps.com/reset/unique_id. 
 
-Any suggestions, LMK!
+
+Any issues, just PM me on Discord @ ro#0008.
 
