@@ -52,5 +52,5 @@ Just execute `npm install` to install the dependencies all at once.
 - The reset password feature uses a table to keep track of reset password links expiry and usability, please insert this new table into your database (assuming you use Houdini) https://pastebin.com/KhdRsDLE. Then setup your GMAIL account, configure the username and password in Config.js and make sure you set the sub_domain field to the sub domain you are running the manager off i.e. manager.cpps.com. This is so that it can send the correct reset password link leading to i.e. manager.cpps.com/reset/unique_id. 
 
 
-Any issues, just PM me on Discord @ ro#0008.
+Any issues or suggestions, just email me: root@rsakeys.org
 
