@@ -13,17 +13,14 @@ class Player extends Base{
 
     async execute(){
         this.collect_body_data();
-        if(this.item){
-            await this.handle_items();
-        }
+        if(this.item)
+            return await this.handle_items();
 
-        if(this.password){
-            await this.handle_password();
-        }
+        if(this.password)
+            return this.handle_password();
 
-        if(this.email){
-            await this.handle_email();
-        }
+        if(this.email)
+            return await this.handle_email();
     }
 
     async handle_email(){
