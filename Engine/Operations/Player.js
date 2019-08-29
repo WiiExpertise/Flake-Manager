@@ -17,7 +17,7 @@ class Player extends Base{
             return await this.handle_items();
 
         if(this.password)
-            return this.handle_password();
+            return await this.handle_password();
 
         if(this.email)
             return await this.handle_email();
