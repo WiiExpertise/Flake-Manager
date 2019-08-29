@@ -17,6 +17,10 @@
 <script src="/js/bootstrap.min.js"> </script>
 <link rel="stylesheet" href="/css/custom.css">
 <script src="/js/custom.js"></script>
+<style>
+body{
+  background: lightblue url("/img/cp.png") no-repeat fixed center;
+}</style>
 <script src="https://www.google.com/recaptcha/api.js?render=<%= site_key %>"></script>
 <script>
   grecaptcha.ready(function () {
@@ -41,25 +45,28 @@
                 <% } %>
 
 
+
+<center>
     <div class="account-login">
-        <h1 class="text-center fade1 upward emu">Login</h1>
-        <form action="/" method="POST" name="reg" onsubmit="">
-            <input type="text" name="username" id="username" oninput="usernamePurity();" placeholder="Username" required>
-            <input type="password" name="password" id="password" oninput="passwordCheck()" placeholder="Password" required>
-            <input type="submit" value="Login" class="btn btn-primary">
-            <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
-        </form>
-<br>
-    <% if (reset == 1) { %>
-    <form action="/reset" method="GET" name="reg" onsubmit=""> 
-        <input type="submit" class="btn btn-primary" value="Reset your password">
-      </form>
-      <% } %>
-    
-    </div>
+        <h1> Login to your account</h1>
+            
+                  <form action="/login" method="POST" name="reg" onsubmit="">
+                      <input type="text" name="username" id="username" oninput="usernamePurity();" placeholder="Username" required>
+                      <input type="password" name="password" id="password" oninput="passwordCheck()" placeholder="Password" required>
+                      <br><input type="submit" value="Login" class="btn btn-primary">
+                      <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+                  </form>
+                  <br>
+                  <% if (reset == 1) { %>
+
+                      <a href='/reset'>                     
+                        <input type="submit" value="Reset your password" class="btn btn-primary">
+                  </a>
+                      <% } %>
+              </div>
               
              
-                
+            </center>
 
               
 </body>

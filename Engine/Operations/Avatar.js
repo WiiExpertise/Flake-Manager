@@ -6,34 +6,48 @@ const path      = require('path');
 const download  = require('download');
 const urlExists = require('url-exists');
 
-const logger    = require('../Console');
 const utils     = require('./Utils');
 
 const Promise   = require('bluebird');
 const Image     = require('./Image');
 
-class Avatar {
-  constructor(penguin, size, cache) {
+const Base = require('../../Configuration');
+
+class Avatar extends Base{
+  constructor(request, response, database) {
+    super();
+    this.response = response;
+    this.request = request;
+    this.database = database;
     this.cachePath = path.join(__dirname, '..', 'Cache');
     this.cacheSource = 'https://icer.ink/mobcdn.clubpenguin.com/game/items/images/paper/image/';
 
 
-
-    this.penguin = this.validate(penguin);
-    this.size = this.validateSize(size);
+    this.size = this.validateSize(120);
+    this.build();
   }
 
-  validate(penguin) {
-    penguin = {
-      "photo": penguin.Photo,
-      "color": penguin.Color,
-      "feet": penguin.Feet,
-      "body": penguin.Body,
-      "hand": penguin.Hand,
-      "face": penguin.Face,
-      "head": penguin.Head,
-      "neck": penguin.Neck,
-      "flag": penguin.Flag
+  async execute(){
+    let img = await this.build();
+    this.user = await this.database.execute('penguin', `findOne`, {where: {ID: `${this.request.params.value}`}});
+    this.response.set('Content-Type', 'image/png');
+    this.response.set('Content-Length', img.length);
+    this.response.end(img);
+  }
+
+  async validate() {
+    this.user = await this.database.execute('penguin', `findOne`, {where: {ID: `${this.request.params.value}`}});
+
+    let penguin = {
+      "photo": this.user.Photo,
+      "color": this.user.Color,
+      "feet": this.user.Feet,
+      "body": this.user.Body,
+      "hand": this.user.Hand,
+      "face": this.user.Face,
+      "head": this.user.Head,
+      "neck": this.user.Neck,
+      "flag": this.user.Flag
     };
 
     for(var i in penguin) {
@@ -87,7 +101,8 @@ class Avatar {
     }
   }
 
-  build() {
+  async build() {
+    this.penguin = await this.validate();
     return new Promise((resolve, reject) => {
       this.checkCache().then(async () => {
         for(var i in this.penguin) {
@@ -144,14 +159,14 @@ class Avatar {
               });
             } else {
               if(e)
-                logger.crash(e);
+                this.log.crash(e);
 
               this.remove(item);
               resolve();
             }
           })
         } else {
-          logger.crash(err);
+          this.log.crash(err);
           this.remove(item);
 
           resolve();

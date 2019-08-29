@@ -20,10 +20,20 @@
 </head>
 <body>
     <% if (!panel_type) { %>
-      <h3>Welcome back, <%= username %> </h3>
+      <h4 class="d-flex justify-content-center"> Welcome back, <%= username %> </h4> 
+        <br>
+        <div class="float-right d-flex align-items-center">
+          <a href='/logout'>                     
+              <input type="submit" value="Logout" class="btn btn-danger col-md-9 btn-logout">
+        </a>
+      </div>
+    
+      
+
               <div class='notup'>
                   <span class="border"></span>
               </div>
+              <br>
               <div id="stats">
                 <table class="table table-bordered" style="margin: 0px auto;">
                   <tbody>
@@ -58,89 +68,82 @@
                   </tbody>
                 </table>
             </div>
-            
+            <h5> Your Penguin</h5>
+            <img class="card-img-top" src="/avatar/<%= id %>" alt="avatar">
 
 
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Your Penguin</h5>
-                  <img class="card-img-top" src="/avatar/<%= id %>" alt="Card image cap">
-              </div>
-            </div>
 
-            <table class="table table-hover" style="margin-block-start: -25.25em;">
-              
-                <thead>
-                    <tr>
-                        <th>User Options</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><form action="/logout" method="GET" name="reg" onsubmit=""> 
-                          <input type="submit" id="button" class="btn btn-primary" value="Logout">
-                        </form></td>
-                    </tr>
-                </tbody>
-                
-  
+          <div class="table"> 
+            <div id="options">
+                <table class="table table-bordered " style="margin-inline-start: 80px; ">
+                    
 
-  
-  
-          <tbody>
-              <tr>
-                  <td><form action="/update_password" method="GET" name="reg" onsubmit=""> 
-                    <input type="submit" id="button" class="btn btn-primary" value="Change Password">
-                  </form></td>
-              </tr>
-          </tbody>
-  
+                            <tr>
+      
+                             <% if (add_item == 1) { %>
+                            <td>
+                                <a href='/items'>
+                              <div class="stats"> 
+                                Add Items &nbsp;                            
+                                    <input type="hidden" name="_method" value="DELETE" />
+                            </div>
+                          </a>
+                            </td>
+                            <% } %>
+                            <% if (redemption == 1) { %>
+                            <td>
+                                <a href='/redemption'>
+                                  <div class="stats"> 
+                                    Redemption&nbsp;                            
+                                        <input type="hidden" name="_method" value="DELETE" />
+                                </div>
+                              </a>
+                                </td>
+                                <% } %>
+                                <td>
+                                    <a href='/password'>
+                                      <div class="stats"> 
+                                        Change Password &nbsp;                            
+                                            <input type="hidden" name="_method" value="DELETE" />
+                                    </div>
+                                  </a>
+                                    </td>
+                                <td>
+                                    <a href='/email'>
+                                      <div class="stats"> 
+                                        Change Email &nbsp;                            
+                                            <input type="hidden" name="_method" value="DELETE" />
+                                    </div>
+                                  </a>
+                                </td>
 
-
-        <tbody>
-            <tr>
-                <td><form action="/update_email" method="GET" name="reg" onsubmit=""> 
-                  <input type="submit" id="button" class="btn btn-primary" value="Change Email">
-                </form></td>
-            </tr>
-        </tbody>
-
-        <% if (redemption == 1) { %>
-  
-          <tbody>
-              <tr>
-                  <td><form action="/redemption" method="GET" name="reg" onsubmit=""> 
-                    <input type="submit" id="button" class="btn btn-primary" value="Unlock Redemption Code">
-                  </form></td>
-              </tr>
-          </tbody>
-          <% } %>
-  
-
-  
-      <% if (add_item == 1) { %>
-  
-        <tbody>
-            <tr>
-                <td><form action="/add_item" method="GET" name="reg" onsubmit=""> 
-                  <input type="submit" id="button" class="btn btn-primary" value="Add Items">
-                </form></td>
-            </tr>
-        </tbody>
-        <% } %>
+                  
         
-  
-  
-            </table>
+                            </tr>
+
+                    </table>
+
+
+
 
 
       <% } %>
 
       <% if (panel_type) { %>
-        <h3>Welcome back, <%= username %> </h3>
+        <h4 class="d-flex justify-content-center"> Welcome back, <%= username %> </h4> 
+        <br>
+        <div class="float-right d-flex align-items-center">
+          <a href='/logout'>                     
+              <input type="submit" value="Logout" class="btn btn-danger col-md-9 btn-logout">
+        </a>
+      </div>
+    
+      
+
               <div class='notup'>
                   <span class="border"></span>
               </div>
+              <br>
               <div id="stats">
                 <table class="table table-bordered" style="margin: 0px auto;">
                   <tbody>
@@ -175,112 +178,111 @@
                   </tbody>
                 </table>
             </div>
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Your Penguin</h5>
-                  <img class="card-img-top" src="/avatar/<%= id %>" alt="Card image cap">
-              </div>
-            </div>
+            <h5> Your Penguin</h5>
+            <img class="card-img-top" src="/avatar/<%= id %>" alt="avatar">
 
-            <table class="table table-hover" style="margin-block-start: -25.25em;">
-              
-              <thead>
-                  <tr>
-                      <th>Moderator Options</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr>
-                      <td><form action="/logout" method="GET" name="reg" onsubmit=""> 
-                        <input type="submit" id="button" class="btn btn-primary" value="Logout">
-                      </form></td>
-                  </tr>
-              </tbody>
-              <% if (manage_penguins == 1) { %>
 
-                <tbody>
-                    <tr>
-                        <td><form action="/manage" method="GET" name="reg" onsubmit=""> 
-                          <input type="submit" id="button" class="btn btn-primary" value="Manage Penguins">
-                        </form></td>
-                    </tr>
-                </tbody>
-                <% } %>
+
+          <div class="table"> 
+            <div id="options">
+                <table class="table table-bordered " style="margin-inline-start: 80px; ">
+                    
+
+                            <tr>
       
-              
+                             <% if (add_item == 1) { %>
+                            <td>
+                                <a href='/items'>
+                              <div class="stats"> 
+                                Add Items &nbsp;                            
+                                    <input type="hidden" name="_method" value="DELETE" />
+                            </div>
+                          </a>
+                            </td>
+                            <% } %>
+                            <% if (redemption == 1) { %>
+                            <td>
+                                <a href='/redemption'>
+                                  <div class="stats"> 
+                                    Redemption&nbsp;                            
+                                        <input type="hidden" name="_method" value="DELETE" />
+                                </div>
+                              </a>
+                                </td>
+                                <% } %>
+                            <td>
+                                <a href='/unban'>
+                                  <div class="stats"> 
+                                    Unban Users &nbsp;                            
+                                        <input type="hidden" name="_method" value="DELETE" />
+                                </div>
+                              </a>
+                                </td>
+                                <td>
+                                    <a href='/email'>
+                                      <div class="stats"> 
+                                        Change Email &nbsp;                            
+                                            <input type="hidden" name="_method" value="DELETE" />
+                                    </div>
+                                  </a>
+                                </td>
 
-            <tbody>
-                <tr>
-                    <td><form action="/ban" method="GET" name="reg" onsubmit=""> 
-                      <input type="submit" id="button" class="btn btn-primary" value="Ban A User">
-                    </form></td>
-                </tr>
-            </tbody>
+                  
+        
+                            </tr>
+
+                    </table>
+
+                    <div class="table"> 
+                        <div id="options">
+                            <table class="table table-bordered" style="margin-inline-start: -520px; ">
+                                
+                                <tr>
+                                <td>
+                                    <a href='/password'>
+                                      <div class="stats"> 
+                                        Change Password &nbsp;                            
+                                            <input type="hidden" name="_method" value="DELETE" />
+                                    </div>
+                                  </a>
+                                    </td>
+                                    <% if (verify_user == 1) { %>
+                                        <td>
+                                            <a href='/verify'>
+                                              <div class="stats"> 
+                                                Verify Usernames &nbsp;                            
+                                                    <input type="hidden" name="_method" value="DELETE" />
+                                            </div>
+                                          </a>
+                                            </td>
+                                            <% } %>
+                                        <td>
+                                            <a href='/userban'>
+                                              <div class="stats"> 
+                                                Ban Users &nbsp;                            
+                                                    <input type="hidden" name="_method" value="DELETE" />
+                                            </div>
+                                          </a>
+                                            </td>
+                                            <% if (manage_penguins == 1) { %>
+                                            <td>
+                                                <a href='/manager'>
+                                                  <div class="stats"> 
+                                                    Manage Penguins &nbsp;                            
+                                                        <input type="hidden" name="_method" value="DELETE" />
+                                                </div>
+                                              </a>
+                                                </td>
+                                                <% } %>
             
-
-<% if (verify_user == 1) { %>
-
-          <tbody>
-              <tr>
-                  <td><form action="/verify" method="GET" name="reg" onsubmit=""> 
-                    <input type="submit" id="button" class="btn btn-primary" value="Verify Usernames">
-                  </form></td>
-              </tr>
-          </tbody>
-          <% } %>
+                              
+                    
+                                        </tr>
+            
+                                </table>
 
 
-        <tbody>
-            <tr>
-                <td><form action="/update_password" method="GET" name="reg" onsubmit=""> 
-                  <input type="submit" id="button" class="btn btn-primary" value="Change Password">
-                </form></td>
-            </tr>
-        </tbody>
-
-      <tbody>
-          <tr>
-              <td><form action="/update_email" method="GET" name="reg" onsubmit=""> 
-                <input type="submit" id="button" class="btn btn-primary" value="Change Email">
-              </form></td>
-          </tr>
-      </tbody>
-
-
-    <tbody>
-        <tr>
-            <td><form action="/unban" method="GET" name="reg" onsubmit=""> 
-              <input type="submit" id="button" class="btn btn-primary" value="Unban A User">
-            </form></td>
-        </tr>
-    </tbody>
-              
-              <% if (redemption == 1) { %>
-  
-          <tbody>
-              <tr>
-                  <td><form action="/redemption" method="GET" name="reg" onsubmit=""> 
-                    <input type="submit" id="button" class="btn btn-primary" value="Unlock Redemption Code">
-                  </form></td>
-              </tr>
-          </tbody>
-          <% } %>
-
-    <% if (add_item == 1) { %>
-
-
-      <tbody>
-          <tr>
-              <td><form action="/add_item" method="GET" name="reg" onsubmit=""> 
-                <input type="submit" id="button" class="btn btn-primary" value="Add Items">
-              </form></td>
-          </tr>
-      </tbody>
-      <% } %>
-
-
-          </table>
-          <% } %>
+<% } %>
      
 </body>
 </html>

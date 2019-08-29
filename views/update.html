@@ -31,13 +31,13 @@
                 <% } %>
 
             <div class="back-button"> 
-                    <form action="/panel" method="GET" onsubmit=""> 
-                    <input type="submit" class="btn btn-primary" value="Go Back">
-                  </form>
+                    <a href='/panel'>                     
+                        <input type="submit" value="Go Back" class="btn btn-primary ">
+                  </a>
                 </div>
 
 <% if (update_type == 'password') { %>
-    <div class="account-login">
+    <div class="update">
         <h1 class="text-center fade1 upward emu">Update Your Password</h1>
         <form action="/update" method="POST" name="reg" onsubmit="">
             <input type="password" name="password" id="password" oninput="passwordCheck()" placeholder="Password" required>
@@ -48,7 +48,7 @@
     <% } %>
 
     <% if (update_type == 'reset_password') { %>
-        <div class="account-login">
+        <div class="update">
             <h1 class="text-center fade1 upward emu">Update Your Password</h1>
             <form action="/reset_password/<%= reset_id %>" method="POST" name="reg" onsubmit="">
                 <input type="password" name="password" id="password" oninput="passwordCheck()" placeholder="Password" required>
@@ -57,22 +57,21 @@
             </form>
         </div>
         <% } %>
-
-    <% if (update_type == 'redemption') { %>
-        <div class="account-login">
+    <% if (update_type == 'redemption' && redemption == 1) { %>
+        <div class="update">
             <h1 class="text-center fade1 upward emu">Redeem A Code</h1>
             <form action="/redeem" method="POST" name="reg" onsubmit="">
                 <input type="text"  name="code" id="code" placeholder="Code" required>
-                <input type="submit" class="btn btn-primary">
+                 <input type="submit" class="btn btn-primary">
             </form>
         </div>
         <% } %>
 
     <% if (update_type == 'edit_field') { %>
-        <div class="account-login">
+        <div class="update">
             <h1 class="text-center fade1 upward emu">Edit this players <%= row %> </h1>
             <form action="/manage/update/<%= row %>/<%= id %>" method="POST" name="reg" onsubmit="">
-                <input type="player_data" name="player_data" id="player_data" placeholder="<%= row %>" required>
+                <input type="text" name="player_data" id="player_data" placeholder="<%= row %>" required>
                 <input type="submit" class="btn btn-primary">
             </form>
         </div>
@@ -81,7 +80,7 @@
 
 
     <% if (update_type == 'email') { %>
-        <div class="account-login">
+        <div class="update">
             <h1 class="text-center fade1 upward emu">Update Your Email</h1>
             <form action="/update" method="POST" name="reg" onsubmit="">
                 <input type="text" name="email" id="email" oninput="emailCheck();" placeholder="Email" required>
@@ -90,8 +89,8 @@
         </div>
         <% } %>
 
-        <% if (update_type == 'reset') { %>
-            <div class="account-login">
+            <% if (update_type == 'reset' && reset == 1) { %>
+            <div class="update">
                 <h1 class="text-center fade1 upward emu">Enter email:</h1>
                 <form action="/reset" method="POST" name="reg" onsubmit="">
                     <input type="text" name="email" id="email" oninput="emailCheck();" placeholder="Email" required>
@@ -100,8 +99,8 @@
             </div>
             <% } %>
 
-        <% if (update_type == 'add_item') { %>
-            <div class="account-login">
+        <% if (update_type == 'add_item' && items == 1) { %>
+            <div class="update">
                 <h1 class="text-center fade1 upward emu">Add Items</h1>
                 <form action="/update" method="POST" name="reg" onsubmit="">
                     <input type="number" min="1"  max="25000" name="item" id="item" placeholder="Item ID" required>
@@ -111,10 +110,10 @@
             <% } %>
 
             <% if (update_type == 'ban') { %>
-                <div class="account-login">
+                <div class="update">
                     <h1 class="text-center fade1 upward emu">Submit A Ban</h1>
                     <form action="/ban" method="POST" name="reg" onsubmit="">
-                        <input type="text" name="username" id="username" oninput="usernamePurity()" placeholder="Username" required>
+                        <input type="text" name="banned_username" id="username" oninput="usernamePurity()" placeholder="Username" required>
                         <input type="number" name="hours" id="hours" placeholder="Hours" required>
                         <input type="text" name="reason" id="reason" oninput="" placeholder="Reason" required>
                         <input type="submit" class="btn btn-primary">
@@ -122,10 +121,10 @@
                 </div>
                 <% } %>
         
-            <% if (update_type == 'verify') { %>
-                <div class="table"> 
+                <% if (update_type == 'verify' && verify == 1) { %>
+                <div class="table verify"> 
     
-                <div id="verify">
+
                             <table class="table table-bordered" style="margin: 0px auto;">
  
                                     <tr>
@@ -142,8 +141,10 @@
                                             <td><%= approval.Username %></td>
                                             <td>
                                                 <div class="stats"> 
-                                                    <a href='/verify/<%= approval.ID %>'>Yes</a> &nbsp;                            
-                                                        <input type="hidden" name="_method" value="DELETE" />
+                                                        <form action="/verify/<%= approval.ID %>" method="POST" name="reg" onsubmit="">
+                                                            <input type="submit" value="Verify" class="btn submit btn-primary">
+                                                        </form>
+    
                                                 </div>
                                             </td>
                                         </tr>
@@ -151,16 +152,13 @@
                                  
                                 </table>
                 </form>
-                </div>
             </div>
             
                 <% } %>
                 <% } %>
 
                 <% if (update_type == 'unban') { %>
-                    <div class="table"> 
-        
-                    <div id="verify">
+                    <div class="table verify"> 
                                 <table class="table table-bordered" style="margin: 0px auto;">
      
                                         <tr>
@@ -178,25 +176,25 @@
                                                 <td><%= bans.Moderator_Username %></td>
                                                 <td><%= bans.Comment %></td>
                                                 <td>
-                                                    <div class="stats"> 
-                                                        <a href='/unban/<%= bans.PenguinID %>'>Yes</a> &nbsp;                                     
-                                                            <input type="hidden" name="_method" value="DELETE" />
+                                                    <div class="stats">    
+                                                    <form action="/unban/<%= bans.PenguinID %>" method="POST" name="reg" onsubmit="">
+                                                        <input type="submit" value="Unban" class="btn submit btn-primary">
+                                                    </form>
                                                     </div>
                                                 </td>
                                             </tr>
                                         <% }) %>
                                      
                                     </table>
-                    </div>
                 </div>
                 
                     <% } %>
                     <% } %>
 
                     <% if (update_type == 'manage') { %>
-                        <div class="table"> 
+                        <div class="table verify"> 
             
-                        <div id="verify">
+ 
                                     <table class="table table-bordered" style="margin: 0px auto;">
          
                                             <tr>
@@ -228,15 +226,13 @@
                                             <% }) %>
                                          
                                         </table>
-                        </div>
                     </div>
                     
                         <% } %>
                         <% } %>
 
-                        <% if (update_type == 'manage_penguin') { %>
-                <div class="table"> 
-                <div id="verify">
+                        <% if (update_type == 'manage_penguin' && manage == 1) { %>
+                <div class="table verify"> 
                     <table class="table table-bordered" style="margin-inline-start: -200px;">
 
                             <tr>
@@ -270,49 +266,52 @@
                                 </td>
                                     <td>
                                     <div class="stats"> 
-                                        <a href='/manage/edit/Username/<%= penguin.ID %>'>Edit Username</a> &nbsp;                            
+                                        <a href='/edit/Username/<%= penguin.ID %>'>Edit Username</a> &nbsp;                            
                                             <input type="hidden" name="_method" value="DELETE" />
                                     </div>
                                 </td>
                                 <td>
                                         <div class="stats"> 
-                                            <a href='/manage/edit/Password/<%= penguin.ID %>'>Edit Password</a> &nbsp;                            
+                                            <a href='/edit/Password/<%= penguin.ID %>'>Edit Password</a> &nbsp;                            
                                                 <input type="hidden" name="_method" value="DELETE" />
                                         </div>
                                     </td>
                                 <td>
                                         <div class="stats"> 
-                                            <a href='/manage/edit/Email/<%= penguin.ID %>'>Edit Email</a> &nbsp;                            
+                                            <a href='/edit/Email/<%= penguin.ID %>'>Edit Email</a> &nbsp;                            
                                                 <input type="hidden" name="_method" value="DELETE" />
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="stats"> 
-                                            <a href='/manage/edit/Approval/<%= penguin.ID %>'>Change Username Approval</a> &nbsp;                            
-                                                <input type="hidden" name="_method" value="DELETE" />
+                                        <div class="stats">                            
+                                            <form action="/manage/edit/Approval/<%= penguin.ID %>" method="POST" name="reg" onsubmit="">
+                                                <input type="submit" value="Edit" class="btn submit btn-primary">
+                                            </form>
                                         </div>
                                     </td>
                                     <td>
-                                            <div class="stats"> 
-                                                <a href='/manage/edit/Active/<%= penguin.ID %>'>Change User Activation</a> &nbsp;                            
-                                                    <input type="hidden" name="_method" value="DELETE" />
+                                            <div class="stats">                         
+                                                <form action="/manage/edit/Active/<%= penguin.ID %>" method="POST" name="reg" onsubmit="">
+                                                    <input type="submit" value="Edit" class="btn submit btn-primary">
+                                                </form>
                                             </div>
                                         </td>
                                             <td>
-                                                    <div class="stats"> 
-                                                        <a href='/manage/edit/Moderator/<%= penguin.ID %>'>Change Moderator</a> &nbsp;                            
-                                                            <input type="hidden" name="_method" value="DELETE" />
+                                                    <div class="stats">                          
+                                                        <form action="/manage/edit/Moderator/<%= penguin.ID %>" method="POST" name="reg" onsubmit="">
+                                                            <input type="submit" value="Edit" class="btn submit btn-primary">
+                                                        </form>
                                                     </div>
                                                 </td>
                                             <td>
                                                     <div class="stats"> 
-                                                        <a href='/manage/edit/Coins/<%= penguin.ID %>'>Edit Coins</a> &nbsp;                            
+                                                        <a href='/edit/Coins/<%= penguin.ID %>'>Edit Coins</a> &nbsp;                            
                                                             <input type="hidden" name="_method" value="DELETE" />
                                                     </div>
                                                 </td>
                                                 <td>
                                                         <div class="stats"> 
-                                                            <a href='/manage/edit/Rank/<%= penguin.ID %>'>Edit Rank</a> &nbsp;                            
+                                                            <a href='/edit/Rank/<%= penguin.ID %>'>Edit Rank</a> &nbsp;                            
                                                                 <input type="hidden" name="_method" value="DELETE" />
                                                         </div>
                                                     </td>
@@ -321,7 +320,6 @@
                         </table>
         </form>
         </div>
-    </div>
                             <% } %>
                             <% } %>
                         
