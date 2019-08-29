@@ -68,15 +68,13 @@ class Player extends Base{
         let items = [];
         this.user = await this.database.execute('penguin', `findOne`, {where: {Username: `${this.username}`}});
         let userItems = await this.database.execute('inventory', `findAll`, {where: {PenguinID: `${this.user.ID}`}});
-        for(let ID in userItems){
+        for(let ID in userItems)
             items.push(userItems[ID].ItemID)
-        }
-        if(items.indexOf(Number(this.item)) == -1){
+   
+        if(items.indexOf(Number(this.item)) == -1)
             return false;
-        }
-        else{
-            return true;
-        }
+        
+        return true;
     }
 
     collect_body_data(){
