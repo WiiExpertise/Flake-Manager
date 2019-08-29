@@ -70,7 +70,7 @@ class Database extends Base{
             await this[`${table}`].update({[`${row[0]}`]: `${query[`${row[0]}`]}`}, {where: {[`${row[1]}`]: `${query[`${row[1]}`]}`}});
         }
         catch(e){
-            this.log.crash(e); 
+            /* this.log.crash(e); */
             this.log.crash(`FILE: Engine/Database.js | LINE: 74`);
         }
     }
