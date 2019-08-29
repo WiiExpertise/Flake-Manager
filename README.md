@@ -4,7 +4,8 @@ NOTE: Credit to jackie/@Pyrodash for writing the Avatar API.
 
 written by ~ ro, feel free to fork or use whatever code/assets you want from this.
 
-preview: https://vimeo.com/331130734
+preview/screenshots: https://imgur.com/a/7gKPs5U https://imgur.com/a/YpRZUwW https://imgur.com/a/WqdXNv6 https://imgur.com/a/7GbpcLL https://imgur.com/a/0qs21aD https://imgur.com/a/nnABs7s https://imgur.com/a/vmGx7Iw https://imgur.com/a/6wI5xZ7 https://imgur.com/a/3bqaq94 https://imgur.com/a/PL9wLvG
+
 
 # How to use?
 
@@ -35,7 +36,5 @@ Just execute `npm install` to install the dependencies all at once.
 # HOW TO SETUP?
 
 - The reset password feature uses a table to keep track of reset password links expiry and usability, please insert this new table into your database (assuming you use Houdini) https://pastebin.com/KhdRsDLE. Then setup your GMAIL account, configure the username and password in Configuration.js and make sure you set the sub_domain field to the sub domain you are running the manager off i.e. manager.cpps.com. This is so that it can send the correct reset password link leading to i.e. manager.cpps.com/reset/unique_id. 
-
-preview: https://imgur.com/a/7gKPs5U https://imgur.com/a/YpRZUwW https://imgur.com/a/WqdXNv6 https://imgur.com/a/7GbpcLL https://imgur.com/a/0qs21aD https://imgur.com/a/nnABs7s https://imgur.com/a/vmGx7Iw https://imgur.com/a/6wI5xZ7 https://imgur.com/a/3bqaq94 https://imgur.com/a/PL9wLvG
 
 Any issues or suggestions, just email me: root@rsakeys.org
