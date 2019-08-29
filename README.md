@@ -30,7 +30,7 @@ Just execute `npm install` to install the dependencies all at once.
 
 - When running this on your site, you need your sub-domain to be proxying off port 3000 (or whatever port you set in Configuration.js). So edit your nginx or apache configuration, add this line `proxy_pass http://localhost:3000/;`.
 
-odemailer and gmails service, you can have an option to reset your password without logging into the panel, for this to work you need a GMAIL account dedicated for the CPPS reset password links, this will be used to email the links, the details of the account will be specified in Configuration.js so that it's usable. Remember this feature is disabled by default so if you want to enable it, you need to set reset_password to 1 in Configuration.js
+- Using nodemailer and gmails service, you can have an option to reset your password without logging into the panel, for this to work you need a GMAIL account dedicated for the CPPS reset password links, this will be used to email the links, the details of the account will be specified in Configuration.js so that it's usable. Remember this feature is disabled by default so if you want to enable it, you need to set reset_password to 1 in Configuration.js
 
 # HOW TO SETUP?
 
