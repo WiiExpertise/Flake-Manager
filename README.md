@@ -24,16 +24,13 @@ Just execute `npm install` to install the dependencies all at once.
    
 - The only file you have to edit is Configuration.js, what you need to edit in there is the secret session key in there, it has to be something random and secure so get any type of password/key from https://randomkeygen.com/ 
 
-- Edit these options: https://imgur.com/a/TyE49wE to allow normal users to add any item in-game or to allow moderators to verify usernames/approval. Just set the options to 1 if you wish.
-
+- Edit these options: https://imgur.com/a/J8ZGDx4 to specify if you want it or for certain permissions. For each feature, keep it as 0 if you DONT want the feature to appear at all, OR change it to 1 if you want the feature to appear to normal users (redemption and adding items), or to moderators (managing penguins and verifying usernames) OR set the feature to 2 if you want it to appear for administrators only. 
 
 - Register your recaptcha keys from google recaptcha (v3). Add your site and secret key here: https://imgur.com/a/JZ54E6V
 
 - When running this on your site, you need your sub-domain to be proxying off port 3000 (or whatever port you set in Configuration.js). So edit your nginx or apache configuration, add this line `proxy_pass http://localhost:3000/;`.
 
 - Using nodemailer and gmails service, you can have an option to reset your password without logging into the panel, for this to work you need a GMAIL account dedicated for the CPPS reset password links, this will be used to email the links, the details of the account will be specified in Configuration.js so that it's usable. Remember this feature is disabled by default so if you want to enable it, you need to set reset_password to 1 in Configuration.js
-
-# HOW TO SETUP?
 
 - The reset password feature uses a table to keep track of reset password links expiry and usability, please insert this new table into your database (assuming you use Houdini) https://pastebin.com/KhdRsDLE. Then setup your GMAIL account, configure the username and password in Configuration.js and make sure you set the sub_domain field to the sub domain you are running the manager off i.e. manager.cpps.com. This is so that it can send the correct reset password link leading to i.e. manager.cpps.com/reset/unique_id. 
 
