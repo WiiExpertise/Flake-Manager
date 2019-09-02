@@ -24,7 +24,7 @@ Just execute `npm install` to install the dependencies all at once.
    
 - The only file you have to edit is Configuration.js, what you need to edit in there is the secret session key in there, it has to be something random and secure so get any type of password/key from https://randomkeygen.com/ 
 
-- Edit these options: https://imgur.com/a/J8ZGDx4 to specify if you want it or for certain permissions. For each feature, keep it as 0 if you DONT want the feature to appear at all, OR change it to 1 if you want the feature to appear to normal users (redemption and adding items), or to moderators (managing penguins and verifying usernames) OR set the feature to 2 if you want it to appear for administrators only. 
+- Edit these options: https://imgur.com/a/J8ZGDx4 to specify if you want it or for certain permissions. Per feature you edit, keep it as 0 if you DONT want the feature to appear at all, OR change it to 1 if you want the feature to appear to normal users (redemption and adding items), or to moderators (managing penguins and verifying usernames) OR set the feature to 2 if you want it to appear for administrators only, if it is set to 2, you must specify who is an administrator by adding their ID to the list here https://imgur.com/a/qfwlZQ0.
 
 - Register your recaptcha keys from google recaptcha (v3). Add your site and secret key here: https://imgur.com/a/JZ54E6V
 
