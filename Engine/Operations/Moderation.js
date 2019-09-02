@@ -30,16 +30,26 @@ class Moderation extends Base{
 
     async handleField(){
         if(this.value == 'update'){
-            let query = JSON.parse(`{"${this.row}":"${this.player_data}", "ID":"${this.id}"}`);
-            await this.database.update('penguin', query);
-            return this.response.redirect(`/manage/${this.id}`);   
+            await this.handleUpdate();   
         }
         else{
             let error = this.displays.find('/error');
             this.response.render(error.page, error.ejs)
         } 
-        
+    }
 
+    async handleUpdate(){
+        if(this.row == 'Password'){
+            this.user = await this.database.execute('penguin', `findOne`, {where: {ID: `${this.id}`}});
+            let password = await this.crypto.generateBcrypt(this.player_data);
+            let query = JSON.parse(`{"Password":"${password}", "ID":"${this.id}"}`);
+            await this.database.update('penguin', query);
+        }
+        else{
+            let query = JSON.parse(`{"${this.row}":"${this.player_data}", "ID":"${this.id}"}`);
+            await this.database.update('penguin', query);
+        }
+        return this.response.redirect(`/manage/${this.id}`);  
     }
 
     async handleChange(){
