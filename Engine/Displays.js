@@ -160,7 +160,7 @@ class Displays extends Base{
         else if (this.link == 'verify'){
             let approvals = await this.database.execute('penguin', `findAll`, {where: {Approval: 0}});
             let approval_data = {approval: approvals}
-            if(await this.is_moderator())
+            if(await this.check_staff(`verify_users`))
                 return this.append(approval_data, data)
             return false;
         }
@@ -168,7 +168,7 @@ class Displays extends Base{
         else if (this.link == 'manager'){
             let penguins = await this.get_penguins();
             let penguin_data = {penguin: penguins}
-            if(await this.is_moderator())
+            if(await this.check_staff(`manage_penguins`))
                 return this.append(penguin_data, data)
             return false;
         }
@@ -227,7 +227,7 @@ class Displays extends Base{
             this.user = await this.database.execute('penguin', `findOne`, {where: {ID: `${this.value}`}});
             data.page = 'update';
             data.ejs = {error_msg: '', manage: this.manage_penguins, update_msg: `Update certain settings for the user: ${this.user.Username}`, approval: this.boolean(this.user.Approval), moderator: this.boolean(this.user.Moderator), active: this.boolean(this.user.Active), penguin: this.user, update_type: 'manage_penguin'};
-            if(await this.is_moderator())
+            if(await this.check_staff(`manage_penguins`))
                 return data;
             return false;
         }   
@@ -244,6 +244,19 @@ class Displays extends Base{
 
         else{
             return this.check_data(data);
+        }
+    }
+
+    async check_staff(feature){
+        if(this[feature] == 2){
+            if(await this.is_administrator())
+                return true;
+            return false;
+        }
+        else{
+            if(await this.is_moderator())
+                return true;
+            return false;
         }
     }
 
