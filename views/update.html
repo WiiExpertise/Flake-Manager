@@ -57,7 +57,7 @@
             </form>
         </div>
         <% } %>
-    <% if (update_type == 'redemption' && redemption == 1) { %>
+    <% if (update_type == 'redemption' && redemption == 1 || update_type == 'redemption' && redemption == 2) { %>
         <div class="update">
             <h1 class="text-center fade1 upward emu">Redeem A Code</h1>
             <form action="/redeem" method="POST" name="reg" onsubmit="">
@@ -99,7 +99,7 @@
             </div>
             <% } %>
 
-        <% if (update_type == 'add_item' && items == 1) { %>
+        <% if (update_type == 'add_item' && items == 1 || update_type == 'add_item' && items == 2) { %>
             <div class="update">
                 <h1 class="text-center fade1 upward emu">Add Items</h1>
                 <form action="/update" method="POST" name="reg" onsubmit="">
@@ -121,7 +121,7 @@
                 </div>
                 <% } %>
         
-                <% if (update_type == 'verify' && verify == 1) { %>
+                <% if (update_type == 'verify' && verify == 1 || update_type == 'verify' && verify == 2) { %>
                 <div class="table verify"> 
     
 

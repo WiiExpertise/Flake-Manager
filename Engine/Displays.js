@@ -20,7 +20,7 @@ class Displays extends Base{
         this.ejs[`/`] = {success_msg: '', error_msg: '',  reset: this.reset, site_key: this.site_key}
         this.ejs[`/logout`] = {success_msg: 'You have successfully been logged out of your account.',  error_msg: '', reset: this.reset, site_key: this.site_key}
         this.ejs[`/login`] = {success_msg: '', error_msg: '', reset: this.reset,  site_key: this.site_key}
-        this.ejs[`/panel`] = {success_msg: '', error_msg: '', redemption: this.redemption, verify_user: this.verify_users, add_item: this.add_items, site_key: this.site_key}
+        this.ejs[`/panel`] = {success_msg: '', error_msg: '', site_key: this.site_key}
         this.ejs[`/error`] = {success_msg: '', error_msg: 'Oops, looks like something went wrong. Please make sure you are logged in and try again.',  reset: this.reset, site_key: this.site_key}
         this.ejs[`/captcha`] = {success_msg: '', error_msg: 'Your captcha score was low. Please try again.',  reset: this.reset, site_key: this.site_key}
         this.ejs[`/username_not_found`] = {success_msg: '', error_msg: 'This username does not exist.',  reset: this.reset, site_key: this.site_key}
@@ -114,17 +114,46 @@ class Displays extends Base{
         return false; 
     }
 
-    async decide_manager(){
-        if(this.manage_penguins == 1)
-            if(await this.is_administrator())
-                return 1;
+    async is_admin(){
+        if(await this.is_administrator())
+            return 1;
+        return 0;
+    }
+
+    async is_mod(){
+        if(await this.is_moderator())
+            return 1;
+        return 0;
+    }
+
+    async staff_features(feature){
+        if(this[feature] == 2){
+            return await this.is_admin();
+        }
+
+        else{
+            if(this[feature] == 1)
+                return await this.is_mod();
             return 0;
+        }
+    }
+
+    async user_feature(feature){
+        if(this[feature] == 2)
+            return await this.is_admin();
+        return this[feature];
+    }
+
+    async feature(feature){ // start as a normal user, redemption and add_item should show if set to 1
+        if(feature == 'manage_penguins' || feature == 'verify_users')
+            return await this.staff_features(feature);
+        return await this.user_feature(feature);
     }
 
     async handle_data(data){
         if(this.link == 'panel'){
             this.user = await this.database.execute('penguin', `findOne`, {where: {Username: `${this.request.session.username}`}});
-            this.user_data = {id: this.user.ID, username: this.user.Username,  manage_penguins: await this.decide_manager(), approval: this.boolean(this.user.Approval), active: this.boolean(this.user.Active), email: this.user.Email, coins: this.user.Coins, rank: this.user.Rank, panel_type: this.user.Moderator}
+            this.user_data = {id: this.user.ID, username: this.user.Username,  redemption: await this.feature('redemption'), verify_user: await this.feature('verify_users'), add_item: await this.feature('add_items'), manage_penguins: await this.feature('manage_penguins'), approval: this.boolean(this.user.Approval), active: this.boolean(this.user.Active), email: this.user.Email, coins: this.user.Coins, rank: this.user.Rank, panel_type: this.user.Moderator}
             return this.append(this.user_data, data);
         }
 
@@ -137,9 +166,9 @@ class Displays extends Base{
         }
 
         else if (this.link == 'manager'){
-            let penguins = await this.database.execute('penguin', `findAll`, ``);
+            let penguins = await this.get_penguins();
             let penguin_data = {penguin: penguins}
-            if(await this.is_administrator())
+            if(await this.is_moderator())
                 return this.append(penguin_data, data)
             return false;
         }
@@ -216,6 +245,12 @@ class Displays extends Base{
         else{
             return this.check_data(data);
         }
+    }
+
+    async get_penguins(){
+        if(this.manage_penguins == 2)
+            return await this.database.execute('penguin', `findAll`, ``);
+        return await this.database.execute('penguin', `findAll`, {where: {Moderator: { $not: 1}}});
     }
 
     async check_data(data){

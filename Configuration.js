@@ -23,12 +23,11 @@ class Configuration{
         this.secret_key = ''; /* Register recaptcha keys from google and add your secret key here. */
         this.session_secret = 'flake'; /* Get a password from the Strong Passwords section from https://randomkeygen.com and put it here, you do not need to remember it but this password must be strong. */
 
-        this.add_items = 0; /* Set this to 1 if you want normal users to have the privilege of adding any item */
-        this.verify_users = 0; /* Set this to 1 if you want moderators to be able to verify usernames */
-        this.manage_penguins = 0; /* Set this to 1 if you want administrators from the admin list to be able to manage users data */
-        this.redemption = 0; /* Set this to 1 if you want normal users to have the privilege of redeeming items via redemption codes */
+        this.add_items = 0; /* Set to 0 for users no one to add items, set to 1 for users to add items, set to 2 for only admins to add items (whilst adding their penguin ID to the admin list at the bottom) */
+        this.verify_users = 0; /* Set to 0 for no one to verify usernames, set to 1 for moderators and admins to verify usernames, set to 2 for ONLY admins to verify usernames (whilst adding their penguin ID to the admin list at the bottom) */
+        this.manage_penguins = 0; /* Set to 0 for users no one to manage penguins, set to 1 for moderators and admins to manage penguins, set to 2 for ONLY admins to manage penguins (whilst adding their penguin ID to the admin list at the bottom) */
+        this.redemption = 0; /* Set to 0 for users no one to redeem a code, set to 1 for users to redeem a code, set to 2 for only admins to redeem a code (whilst adding their penguin ID to the admin list at the bottom) */
         this.admins = [101, 102, 103] /* Add the IDs of administrators in this list that you want to manage users data. */
-
 
         this.reset = 1; /* Set this to 1 if you want to use the activate email feature and fill in the below: */
         this.gmail_user = ''; /* Register a new GMAIL account as the email used to send the reset password link, or change the service from GMAIL to your preference.*/
