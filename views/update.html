@@ -238,6 +238,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Username</th>
+                                <th>Nickname</th>
                                 <th>Password</th>
                                 <th>Email</th>
                                 <th>Approved Username?</th>
@@ -252,6 +253,7 @@
                                 <tr>
                                     <td><%= penguin.ID %></td>
                                     <td><%= penguin.Username %></td>
+                                    <td><%= penguin.Nickname %></td>
                                     <td>**********</td>
                                     <td><%= penguin.Email %></td>
                                     <td><%= approval %></td>
@@ -267,6 +269,12 @@
                                     <td>
                                     <div class="stats"> 
                                         <a href='/edit/Username/<%= penguin.ID %>'>Edit Username</a> &nbsp;                            
+                                            <input type="hidden" name="_method" value="DELETE" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="stats"> 
+                                        <a href='/edit/Nickname/<%= penguin.ID %>'>Edit Nickname</a> &nbsp;                            
                                             <input type="hidden" name="_method" value="DELETE" />
                                     </div>
                                 </td>
