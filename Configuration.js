@@ -13,20 +13,22 @@ const crypto = require ('./Engine/Crypto')
 class Configuration{
     constructor(){
         this.database_host = 'localhost';
-        this.database_username = 'root';
-        this.database_password = '';
+        this.database_username = 'ro'; /* Set this to your MySQL username */
+        this.database_password = ''; /* Set this to your MySQL password */
         this.database_port = 3306;
         this.database_name = 'Houdini';
 
         this.port = 3000;
-        this.site_key = '';
-        this.secret_key = '';
-        this.session_secret = 'flake';
+        this.site_key = ''; /* Register recaptcha keys from google and add your site key here. */
+        this.secret_key = ''; /* Register recaptcha keys from google and add your secret key here. */
+        this.session_secret = 'flake'; /* Get a password from the Strong Passwords section from https://randomkeygen.com and put it here, you do not need to remember it but this password must be strong. */
 
-        this.add_items = 0;
-        this.verify_users = 0;
-        this.manage_penguins = 0;
-        this.redemption = 0;
+        this.add_items = 0; /* Set this to 1 if you want normal users to have the privilege of adding any item */
+        this.verify_users = 0; /* Set this to 1 if you want moderators to be able to verify usernames */
+        this.manage_penguins = 0; /* Set this to 1 if you want administrators from the admin list to be able to manage users data */
+        this.redemption = 0; /* Set this to 1 if you want normal users to have the privilege of redeeming items via redemption codes */
+        this.admins = [101, 102, 103] /* Add the IDs of administrators in this list that you want to manage users data. */
+
 
         this.reset = 1; /* Set this to 1 if you want to use the activate email feature and fill in the below: */
         this.gmail_user = ''; /* Register a new GMAIL account as the email used to send the reset password link, or change the service from GMAIL to your preference.*/

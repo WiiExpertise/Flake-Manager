@@ -20,7 +20,7 @@ class Displays extends Base{
         this.ejs[`/`] = {success_msg: '', error_msg: '',  reset: this.reset, site_key: this.site_key}
         this.ejs[`/logout`] = {success_msg: 'You have successfully been logged out of your account.',  error_msg: '', reset: this.reset, site_key: this.site_key}
         this.ejs[`/login`] = {success_msg: '', error_msg: '', reset: this.reset,  site_key: this.site_key}
-        this.ejs[`/panel`] = {success_msg: '', error_msg: '', redemption: this.redemption,  manage_penguins: this.manage_penguins, verify_user: this.verify_users, add_item: this.add_items, site_key: this.site_key}
+        this.ejs[`/panel`] = {success_msg: '', error_msg: '', redemption: this.redemption, verify_user: this.verify_users, add_item: this.add_items, site_key: this.site_key}
         this.ejs[`/error`] = {success_msg: '', error_msg: 'Oops, looks like something went wrong. Please make sure you are logged in and try again.',  reset: this.reset, site_key: this.site_key}
         this.ejs[`/captcha`] = {success_msg: '', error_msg: 'Your captcha score was low. Please try again.',  reset: this.reset, site_key: this.site_key}
         this.ejs[`/username_not_found`] = {success_msg: '', error_msg: 'This username does not exist.',  reset: this.reset, site_key: this.site_key}
@@ -114,10 +114,17 @@ class Displays extends Base{
         return false; 
     }
 
+    async decide_manager(){
+        if(this.manage_penguins == 1)
+            if(await this.is_administrator())
+                return 1;
+            return 0;
+    }
+
     async handle_data(data){
         if(this.link == 'panel'){
             this.user = await this.database.execute('penguin', `findOne`, {where: {Username: `${this.request.session.username}`}});
-            this.user_data = {id: this.user.ID, username: this.user.Username, approval: this.boolean(this.user.Approval), active: this.boolean(this.user.Active), email: this.user.Email, coins: this.user.Coins, rank: this.user.Rank, panel_type: this.user.Moderator}
+            this.user_data = {id: this.user.ID, username: this.user.Username,  manage_penguins: await this.decide_manager(), approval: this.boolean(this.user.Approval), active: this.boolean(this.user.Active), email: this.user.Email, coins: this.user.Coins, rank: this.user.Rank, panel_type: this.user.Moderator}
             return this.append(this.user_data, data);
         }
 
@@ -130,10 +137,9 @@ class Displays extends Base{
         }
 
         else if (this.link == 'manager'){
-            let penguins = await this.database.execute('penguin', `findAll`, {where: {Moderator: { $not: 1}}});
+            let penguins = await this.database.execute('penguin', `findAll`, ``);
             let penguin_data = {penguin: penguins}
-            await this.database.penguin.findAll();
-            if(await this.is_moderator())
+            if(await this.is_administrator())
                 return this.append(penguin_data, data)
             return false;
         }
@@ -221,6 +227,13 @@ class Displays extends Base{
     async is_moderator(){
         let user = await this.database.execute('penguin', `findOne`, {where: {Username: `${this.request.session.username}`}});
         return user.Moderator;
+    }
+
+    async is_administrator(){
+        let user = await this.database.execute('penguin', `findOne`, {where: {Username: `${this.request.session.username}`}});
+        if(this.admins.includes(user.ID))
+            return true;
+        return false;
     }
 
     append(user_data, data){
