@@ -29,7 +29,7 @@ class Configuration{
         this.redemption = 0; /* Set to 0 for users no one to redeem a code, set to 1 for users to redeem a code, set to 2 for only admins to redeem a code (whilst adding their penguin ID to the admin list at the bottom) */
         this.admins = [101, 102, 103] /* Add the IDs of administrators in this list that you want to manage users data. */
 
-        this.reset = 1; /* Set this to 1 if you want to use the activate email feature and fill in the below: */
+        this.reset = 0; /* Set this to 1 if you want to use the activate email feature and fill in the below: */
         this.gmail_user = ''; /* Register a new GMAIL account as the email used to send the reset password link, or change the service from GMAIL to your preference.*/
         this.gmail_pass = ''; /* Enter the GMAIL accounts password here*/
         this.cpps_name = 'Flake'; /* The name of your CPPS that will appear in the activation email */
