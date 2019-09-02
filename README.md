@@ -22,16 +22,17 @@ preview/screenshots: https://imgur.com/a/7gKPs5U https://imgur.com/a/YpRZUwW htt
 Just execute `npm install` to install the dependencies all at once.
  
    
-- The only file you have to edit is Configuration.js, what you need to edit in there is the secret session key in there, it has to be something random and secure so get any type of password/key from https://randomkeygen.com/ 
+- The only file you have to edit is Configuration.js, what you need to edit in there is the secret session key, it has to be something random and secure so get a password from the Strong Passwords section of: https://randomkeygen.com/ 
 
-- Edit these options: https://imgur.com/a/J8ZGDx4 to specify if you want it or for certain permissions. Per feature you edit, keep it as 0 if you DONT want the feature to appear at all, OR change it to 1 if you want the feature to appear to normal users (redemption and adding items), or to moderators (managing penguins and verifying usernames) OR set the feature to 2 if you want it to appear for administrators only, if it is set to 2, you must specify who is an administrator by adding their ID to the list here https://imgur.com/a/qfwlZQ0.
+- Edit these if you wish: https://imgur.com/a/J8ZGDx4 to specify if you want it available for everyone or for certain people. Per feature you edit, keep it as 0 if you DONT want the feature to appear at all, OR change it to 1 if you want the feature to appear to normal users (redemption and adding items), or to moderators (managing penguins and verifying usernames) OR set the feature to 2 if you want it to appear for administrators only, if it is set to 2, you must specify who is an administrator by adding their ID to the list here https://imgur.com/a/qfwlZQ0.
 
 - Register your recaptcha keys from google recaptcha (v3). Add your site and secret key here: https://imgur.com/a/JZ54E6V
 
-- When running this on your site, you need your sub-domain to be proxying off port 3000 (or whatever port you set in Configuration.js). So edit your nginx or apache configuration, add this line `proxy_pass http://localhost:3000/;`.
+- When running this panel, you need your sub-domain to be reverse proxying off port 3000 (or whatever port you set in Configuration.js). So edit your nginx, add this line `proxy_pass http://localhost:3000/;`. You can find a similar alternative for apache too. If you choose to not reverse proxy, you will have to visit the link via subdomain:3000 (adding :3000 on the end of the URL). This is not recommended, although possible. Make sure you keep your panel files away from your web-server, which means DON'T put them in /var/www/html or /var/www. 
 
 - Using nodemailer and gmails service, you can have an option to reset your password without logging into the panel, for this to work you need a GMAIL account dedicated for the CPPS reset password links, this will be used to email the links, the details of the account will be specified in Configuration.js so that it's usable. Remember this feature is disabled by default so if you want to enable it, you need to set reset_password to 1 in Configuration.js
 
 - The reset password feature uses a table to keep track of reset password links expiry and usability, please insert this new table into your database (assuming you use Houdini) https://pastebin.com/KhdRsDLE. Then setup your GMAIL account, configure the username and password in Configuration.js and make sure you set the sub_domain field to the sub domain you are running the manager off i.e. manager.cpps.com. This is so that it can send the correct reset password link leading to i.e. manager.cpps.com/reset/unique_id. 
+
 
 Any issues or suggestions, just email me: root@rsakeys.org
