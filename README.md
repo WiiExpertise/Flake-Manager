@@ -14,7 +14,8 @@ preview/screenshots: https://imgur.com/a/7gKPs5U https://imgur.com/a/YpRZUwW htt
  - upload your manager somewhere (apart from the web-server of course!), use `cd` to go to the directory wherever it is placed. 
  - Once you are in the directory, you can run `npm install` and it will download all the dependencies you need for this manager to work. 
  - Now all you have to do is edit Configuration.js.
- - Run the manager from terminal using the command `node Boot`. 
+ - Run the manager from terminal using the command `node Boot` to test if everything works.
+ - If everything works, make sure you're in the directory with the manager and run the command `screen -S manager node Boot` to keep the    manager running all the time.
  - Party.
 
 # Requirements
@@ -30,7 +31,7 @@ Just execute `npm install` to install the dependencies all at once.
 
 - When running this panel, you need your sub-domain to be reverse proxying off port 4444 so that you can visit your panel link directly, instead of having :3000 added at the end of it. So edit your nginx configuration, add this line proxy_pass http://localhost:3000/;. Make sure the default placed line try_files $uri $uri/ =404; is removed. You can find a similar alternative for apache too. If you choose to not reverse proxy, you will have to visit the link via subdomain:3000 (adding :3000 on the end of the URL). This is not recommended, although is still possible. Make sure you keep your panel files away from your web-server, which means DON'T put them in /var/www/html or /var/www.
 
-- Using nodemailer and gmails service, you can have an option to reset your password without logging into the panel, for this to work you need a GMAIL account dedicated for the CPPS reset password links, this will be used to email the links, the details of the account will be specified in Configuration.js so that it's usable. Remember this feature is disabled by default so if you want to enable it, you need to set reset_password to 1 in Configuration.js
+- Using nodemailer and gmails service, you can have an option to reset your password without logging into the panel, for this to work you need a GMAIL account dedicated for the CPPS reset password links, this will be used to email the links, the details of the account will be specified in Configuration.js so that it's usable. Remember this feature is enabled by default so if you want to disable it, you need to set reset_password to 0 in Configuration.js
 
 - The reset password feature uses a table to keep track of reset password links expiry and usability, please insert this new table into your database (assuming you use Houdini) https://pastebin.com/KhdRsDLE. Then setup your GMAIL account, configure the username and password in Configuration.js and make sure you set the sub_domain field to the sub domain you are running the manager off i.e. manager.cpps.com. This is so that it can send the correct reset password link leading to i.e. manager.cpps.com/reset/unique_id. 
 
